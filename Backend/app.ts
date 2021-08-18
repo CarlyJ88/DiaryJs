@@ -7,7 +7,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cors())
 
-app.get('/', async(req, res) =>{
+app.get('/list', async(req, res) =>{
   res.json(await listEntries())
 })
 
@@ -18,5 +18,4 @@ app.post('/add-entry', async(req, res) => {
   res.json(passBack)
 })
 
-export default app
-
+export default app;
