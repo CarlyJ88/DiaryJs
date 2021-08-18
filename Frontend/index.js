@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 // add entry from text box
 form6.addEventListener('submit', (event) => {
@@ -8,24 +8,22 @@ form6.addEventListener('submit', (event) => {
 });
 
 // get diary entries
-const diaryEntries = [];
 axios.get('http://localhost:4000/list')
 .then(res => res.data)
-.then(data => data.forEach(element => {
-  console.log(element, 'element')
-  diaryEntries.push(element)
-}))
 .then(listEntries)
-console.log(diaryEntries, 'diaryEntries');
 
+function belongsTogether(element, item){
+  let newElement = document.createElement(element);
+  newElement.append(item);
+  body.append(newElement);
+}
 
-function listEntries() {
+function listEntries(diaryEntries) {
   for (let i = 0; i < diaryEntries.length; i++){
-    let newTitle = document.createElement('cite');
-    let newTodaysThoughts = document.createElement('pre');
-    newTitle.append(diaryEntries[i].title)
-    newTodaysThoughts.append(diaryEntries[i].entry)
-    body.append(newTitle);
-    body.append(newTodaysThoughts);
+    belongsTogether('cite', diaryEntries[i].title);
+    belongsTogether('pre', diaryEntries[i].entry);
+    belongsTogether('pre', diaryEntries[i].date);
   }
 }
+
+// post diary entry
