@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Diary</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
-  </head>
-  <body id="body">
-    <form id="form6">
-        <div>
-            <textarea id="myTextArea"></textarea>
-          </div>
-        <input type="submit" value="Send Request" style="margin-bottom: 5px">
-    </form>
-    <cite id="title">Today in HTML</cite>
-    <pre id="todaysThoughts">example in HTML</pre>
-    <script src="index.js"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Diary</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+</head>
+
+<body id="body">
+  <form id="form6">
+    <label for="fname">Title</label><br>
+    <input type="text" id="titleInput" name="asomething"><br>
+    <label for="fname">Today's thoughts</label><br>
+    <div>
+      <textarea id="myTextArea" wrap="hard"></textarea>
+    </div>
+    <input type="submit" value="Send Request" style="margin-bottom: 5px">
+  </form>
+  <div style="text-align: center">
+    <cite id="title"></cite>
+    <pre id="todaysThoughts" style="line-height: 200%"></pre>
+  </div>
+  <script src="index.js"></script>
+</body>
+
 </html>
