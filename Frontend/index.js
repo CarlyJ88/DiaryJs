@@ -4,24 +4,31 @@ import axios from 'axios';
 form6.addEventListener('submit', (event) => {
   event.preventDefault();
   console.log(event, 'event')
-  console.log(title, 'title')
-  title.innerText = titleInput.value;
-  todaysThoughts.innerHTML = myTextArea.value;
+  axios.post('http://localhost:4000/add-entry', {
+      title: titleInput.value,
+      entry: myTextArea.value
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 });
-console.log(title, 'title outside')
+
 // get diary entries
 axios.get('http://localhost:4000/list')
-.then(res => res.data)
-.then(listEntries)
+  .then(res => res.data)
+  .then(listEntries)
 
-function belongsTogether(element, item, newdiv){
+function belongsTogether(element, item, newdiv) {
   let newElement = document.createElement(element);
   newElement.append(item);
   newdiv.append(newElement);
 }
 
 function listEntries(diaryEntries) {
-  for (let i = 0; i < diaryEntries.length; i++){
+  for (let i = 0; i < diaryEntries.length; i++) {
     const newdiv = document.createElement('div');
     newdiv.style = "text-align: center";
     belongsTogether('cite', diaryEntries[i].title, newdiv);
@@ -30,5 +37,3 @@ function listEntries(diaryEntries) {
     body.append(newdiv);
   }
 }
-
-// post diary entry
