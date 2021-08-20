@@ -1,5 +1,5 @@
 import express from "express";
-import {listEntries, addEntry} from "./diaryService";
+import {listEntries, addEntry, deleteEntry} from "./diaryService";
 import cors from "cors"
 
 const app = express();
@@ -18,4 +18,13 @@ app.post('/add-entry', async(req, res) => {
   res.json(passBack)
 })
 
+app.delete('/delete-entry', async(req, res) => {
+  const id = req.body.id
+  const comingBack = await deleteEntry(id)
+  res.json(comingBack)
+})
+
 export default app;
+
+// console.log(req.body, 'req.body')
+// console.log(id)
