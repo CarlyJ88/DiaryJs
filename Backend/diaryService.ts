@@ -23,3 +23,8 @@ export async function addEntry(entries: Entries): Promise<EntriesSaved> {
 export async function deleteEntry(id: number): Promise<void> {
   await executeQuery('DELETE FROM entries WHERE id = $1', [id]);
 }
+
+export async function editEntry(entries: EntriesSaved): Promise<EntriesSaved> {
+  const entry = await executeQuery('UPDATE entries SET title = $1, entry = $2 WHERE id = $3 RETURNING *', [entries.title, entries.entry, entries.id]);
+  return { id: entry.rows[0].id, title: entry.rows[0].title, entry: entry.rows[0].entry, date: entry.rows[0].date };
+}
