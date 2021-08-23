@@ -19,6 +19,10 @@ form6.addEventListener('submit', (event) => {
       button1.innerHTML = 'Remove';
       body.append(newdiv);
     })
+    .then(() => {
+      titleInput.value = "";
+      myTextArea.value = "";
+    })
     .catch(function (error) {
       console.log(error);
     });
