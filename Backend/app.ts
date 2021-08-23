@@ -25,6 +25,3 @@ app.delete('/delete-entry', async(req, res) => {
 })
 
 export default app;
-
-// console.log(req.body, 'req.body')
-// console.log(id)

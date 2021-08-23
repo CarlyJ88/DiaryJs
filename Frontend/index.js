@@ -10,7 +10,7 @@ form6.addEventListener('submit', (event) => {
     })
     .then(function (response) {
       console.log(response);
-    })
+    }) // refresh page!!!!
     .catch(function (error) {
       console.log(error);
     });
@@ -31,9 +31,22 @@ function listEntries(diaryEntries) {
   for (let i = 0; i < diaryEntries.length; i++) {
     const newdiv = document.createElement('div');
     newdiv.style = "text-align: center";
+    // console.log(diaryEntries[i], 'diary entries i')
     belongsTogether('cite', diaryEntries[i].title, newdiv);
     belongsTogether('pre', diaryEntries[i].entry, newdiv);
     belongsTogether('pre', diaryEntries[i].date, newdiv);
+    let button1 = document.createElement('button');
+    newdiv.append(button1);
+    button1.innerHTML = 'Remove';
+    
+    button1.addEventListener('click', (event) => {
+      event.preventDefault();
+      axios.delete('http://localhost:4000/delete-entry', {data: {
+        id: diaryEntries[i].id
+      },})
+        // .then() /*remove entry ---- REFRESH THE PAGE*/
+    })
     body.append(newdiv);
   }
 }
+
