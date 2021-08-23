@@ -44,7 +44,8 @@ function listEntries(diaryEntries) {
       axios.delete('http://localhost:4000/delete-entry', {data: {
         id: diaryEntries[i].id
       },})
-        // .then() /*remove entry ---- REFRESH THE PAGE*/
+        .then(() => newdiv.remove())
+        // add error handling
     })
     body.append(newdiv);
   }
