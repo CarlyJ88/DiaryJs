@@ -9,8 +9,16 @@ form6.addEventListener('submit', (event) => {
       entry: myTextArea.value
     })
     .then(function (response) {
-      console.log(response);
-    }) // refresh page!!!!
+      const newdiv = document.createElement('div');
+      newdiv.style = "text-align: center";
+      belongsTogether('cite', response.data.title, newdiv);
+      belongsTogether('pre', response.data.entry, newdiv);
+      belongsTogether('pre', response.data.date, newdiv);
+      let button1 = document.createElement('button');
+      newdiv.append(button1);
+      button1.innerHTML = 'Remove';
+      body.append(newdiv);
+    })
     .catch(function (error) {
       console.log(error);
     });
