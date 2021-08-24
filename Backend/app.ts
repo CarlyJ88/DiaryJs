@@ -27,6 +27,7 @@ app.delete('/delete-entry', async(req, res) => {
 app.put('/edit-entry', async(req, res) => {
   console.log('did I happen?', req)
   const entry = req.body
+  console.log(entry);
   const passBack = await editEntry(entry)
   res.json(passBack)
 })
