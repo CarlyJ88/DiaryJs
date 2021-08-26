@@ -59,7 +59,7 @@ function listEntries(diaryEntries) {
       modalDiv.id = 'modal';
       modalDiv.style = 'position: fixed; z-index: 999; left: 25%; height: 100%; width: 100%; top: 0; left: 0; background-color: rgba(0,0,0,0.5); display: flex; justify-content: center;'
       const form7 = document.createElement('form');
-      form7.style = 'border: 3px solid #1e1e1f; background: #Fdfcfa; width: 750px; height: 500px; position: absolute; top: 0%; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; top: 25%'
+      form7.style = 'border: 3px solid #1e1e1f; background: #FFFAFA; width: 750px; height: 500px; position: absolute; top: 0%; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; top: 25%'
       const titleLabel = document.createElement('label');
       titleLabel.innerHTML = 'Title';
       const titleInput2 = document.createElement('input');
