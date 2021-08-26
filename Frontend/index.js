@@ -9,9 +9,9 @@ form6.addEventListener('submit', (event) => {
     })
     .then(function (response) {
       const newdiv = document.createElement('div');
-      let button1 = document.createElement('button');
-      let button2 = document.createElement('button');
-      createEntry(newdiv, button1, button2, response.data);
+      let deleteButton = document.createElement('button');
+      let editButton = document.createElement('button');
+      createEntry(newdiv, deleteButton, editButton, response.data);
       body.append(newdiv);
     })
     .then(() => {
@@ -37,11 +37,12 @@ function belongsTogether(element, item, newdiv) {
 function listEntries(diaryEntries) {
   for (let i = 0; i < diaryEntries.length; i++) {
     const newdiv = document.createElement('div');
-    let button1 = document.createElement('button');
-    let button2 = document.createElement('button');
-    createEntry(newdiv, button1, button2, diaryEntries[i]);
+    let deleteButton = document.createElement('button');
+    let editButton = document.createElement('button');
+    createEntry(newdiv, deleteButton, editButton, diaryEntries[i]);
 
-    button1.addEventListener('click', (event) => {
+    // delete entry
+    deleteButton.addEventListener('click', (event) => {
       event.preventDefault();
       axios.delete('http://localhost:4000/delete-entry', {
           data: {
@@ -51,23 +52,40 @@ function listEntries(diaryEntries) {
         .then(() => newdiv.remove())
       // todo: add error handling
     })
-    button2.addEventListener('click', (event) => {
+    // create new form to edit entry
+    editButton.addEventListener('click', (event) => {
       event.preventDefault();
+      const modalDiv = document.createElement('div');
+      modalDiv.id = 'modal';
+      modalDiv.style = 'position: fixed; top: 25%; z-index: 999; top: 25%; left: 25%'
       const form7 = document.createElement('form');
+      form7.style = 'border: 3px solid #1e1e1f; background: white; width: 750px; height: 500px; position: absolute; top: 0%; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-evenly;'
+      const titleLabel = document.createElement('label');
+      titleLabel.innerHTML = 'Title';
       const titleInput2 = document.createElement('input');
+      titleInput2.style = 'width: 150px; position relative; right: 50%'
+      const myTextLabel = document.createElement('label');
+      myTextLabel.innerHTML = "Today's Thoughts";
       const myTextArea2 = document.createElement('textarea');
+      myTextArea2.style = 'height: 150px; width: 500px'
       const submit2 = document.createElement('input');
       titleInput.type = "text";
       submit2.type = "submit";
       submit2.value = "Send Request";
+      submit2.style = "width: 100px"
       submit2.style = "margin-bottom: 5px";
       submit2.style.background = "#FF1493";
+      form7.append(titleLabel);
       form7.append(titleInput2);
+      form7.append(myTextLabel);
       form7.append(myTextArea2);
       form7.append(submit2);
-      newdiv.append(form7);
+      modalDiv.append(form7);
+      body.append(modalDiv);
+      // newdiv.append(form7);
       console.log(titleInput2.value, 'titleinput', myTextArea2.value, 'mytextarea')
 
+      // edit entry
       form7.addEventListener('submit', (event) => {
         event.preventDefault();
         console.log(titleInput2.value, 'titleinput', myTextArea2.value, 'mytextarea');
@@ -79,32 +97,26 @@ function listEntries(diaryEntries) {
         .then(function (response) {
           console.log(response.data);
           const newdiv2 = document.createElement('div');
-          let button1 = document.createElement('button');
-          let button2 = document.createElement('button');
-          createEntry(newdiv2, button1, button2, response.data);
+          let deleteButton = document.createElement('button');
+          let editButton = document.createElement('button');
+          createEntry(newdiv2, deleteButton, editButton, response.data);
           body.append(newdiv2);
           newdiv.remove();
         })
       // todo: add error handling
       });
-      
-
-
-
-
-  
     })
     body.append(newdiv);
   }
 }
 
-function createEntry(newdiv, button1, button2, diaryEntries) {
+function createEntry(newdiv, deleteButton, editButton, diaryEntries) {
   newdiv.style = "text-align: center";
   belongsTogether('cite', diaryEntries.title, newdiv);
   belongsTogether('pre', diaryEntries.entry, newdiv);
   belongsTogether('pre', diaryEntries.date, newdiv);
-  newdiv.append(button1);
-  newdiv.append(button2);
-  button1.innerHTML = 'Remove';
-  button2.innerHTML = 'Edit';
+  newdiv.append(deleteButton);
+  newdiv.append(editButton);
+  deleteButton.innerHTML = 'Remove';
+  editButton.innerHTML = 'Edit';
 }
