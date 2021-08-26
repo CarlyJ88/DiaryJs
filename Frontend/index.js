@@ -57,24 +57,23 @@ function listEntries(diaryEntries) {
       event.preventDefault();
       const modalDiv = document.createElement('div');
       modalDiv.id = 'modal';
-      modalDiv.style = 'position: fixed; top: 25%; z-index: 999; top: 25%; left: 25%'
+      modalDiv.style = 'position: fixed; z-index: 999; left: 25%; height: 100%; width: 100%; top: 0; left: 0; background-color: rgba(0,0,0,0.5); display: flex; justify-content: center;'
       const form7 = document.createElement('form');
-      form7.style = 'border: 3px solid #1e1e1f; background: white; width: 750px; height: 500px; position: absolute; top: 0%; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-evenly;'
+      form7.style = 'border: 3px solid #1e1e1f; background: #Fdfcfa; width: 750px; height: 500px; position: absolute; top: 0%; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; top: 25%'
       const titleLabel = document.createElement('label');
       titleLabel.innerHTML = 'Title';
       const titleInput2 = document.createElement('input');
-      titleInput2.style = 'width: 150px; position relative; right: 50%'
+      titleInput2.style = 'width: 150px; position relative; background: #Fdfcfa; right: 50%'
       const myTextLabel = document.createElement('label');
       myTextLabel.innerHTML = "Today's Thoughts";
       const myTextArea2 = document.createElement('textarea');
-      myTextArea2.style = 'height: 150px; width: 500px'
+      myTextArea2.style = 'height: 150px; background: #Fdfcfa; width: 500px'
       const submit2 = document.createElement('input');
       titleInput.type = "text";
       submit2.type = "submit";
       submit2.value = "Send Request";
       submit2.style = "width: 100px"
       submit2.style = "margin-bottom: 5px";
-      submit2.style.background = "#FF1493";
       form7.append(titleLabel);
       form7.append(titleInput2);
       form7.append(myTextLabel);
