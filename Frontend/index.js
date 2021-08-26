@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { close } from 'fs';
 
 // add entry from text box
 form6.addEventListener('submit', (event) => {
@@ -60,6 +61,9 @@ function listEntries(diaryEntries) {
       modalDiv.style = 'position: fixed; z-index: 999; left: 25%; height: 100%; width: 100%; top: 0; left: 0; background-color: rgba(0,0,0,0.5); display: flex; justify-content: center;'
       const form7 = document.createElement('form');
       form7.style = 'border: 3px solid #1e1e1f; background: #FFFAFA; width: 750px; height: 500px; position: absolute; top: 0%; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; top: 25%'
+      const closeButton = document.createElement('button');
+      closeButton.style = 'position: absolute; top: 0; right: 0';
+      closeButton.innerHTML = 'X'
       const titleLabel = document.createElement('label');
       titleLabel.innerHTML = 'Title';
       const titleInput2 = document.createElement('input');
@@ -74,6 +78,7 @@ function listEntries(diaryEntries) {
       submit2.value = "Send Request";
       submit2.style = "width: 100px"
       submit2.style = "margin-bottom: 5px";
+      form7.append(closeButton);
       form7.append(titleLabel);
       form7.append(titleInput2);
       form7.append(myTextLabel);
@@ -81,8 +86,12 @@ function listEntries(diaryEntries) {
       form7.append(submit2);
       modalDiv.append(form7);
       body.append(modalDiv);
-      // newdiv.append(form7);
-      console.log(titleInput2.value, 'titleinput', myTextArea2.value, 'mytextarea')
+
+      closeButton.addEventListener('submit', (event) => {
+        event.preventDefault();
+        modalDiv.remove();
+      })
+      
 
       // edit entry
       form7.addEventListener('submit', (event) => {
@@ -101,6 +110,7 @@ function listEntries(diaryEntries) {
           createEntry(newdiv2, deleteButton, editButton, response.data);
           body.append(newdiv2);
           newdiv.remove();
+          modalDiv.remove();
         })
       // todo: add error handling
       });
