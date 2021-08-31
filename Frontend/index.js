@@ -1,5 +1,8 @@
 import axios from 'axios';
-import { close } from 'fs';
+
+function app() {
+  getEntries();
+}
 
 // add entry from text box
 form6.addEventListener('submit', (event) => {
@@ -25,9 +28,12 @@ form6.addEventListener('submit', (event) => {
 });
 
 // get diary entries
-axios.get('http://localhost:4000/list')
-  .then(res => res.data)
-  .then(listEntries)
+function getEntries() {
+  axios.get('http://localhost:4000/list')
+    .then(res => res.data)
+    .then(listEntries)
+}
+
 
 function belongsTogether(element, item, newdiv) {
   let newElement = document.createElement(element);
@@ -42,6 +48,7 @@ function listEntries(diaryEntries) {
     let editButton = document.createElement('button');
     createEntry(newdiv, deleteButton, editButton, diaryEntries[i]);
 
+
     // delete entry
     deleteButton.addEventListener('click', (event) => {
       event.preventDefault();
@@ -53,6 +60,7 @@ function listEntries(diaryEntries) {
         .then(() => newdiv.remove())
       // todo: add error handling
     })
+    
     // create new form to edit entry
     editButton.addEventListener('click', (event) => {
       event.preventDefault();
@@ -113,7 +121,8 @@ function listEntries(diaryEntries) {
           modalDiv.remove();
         })
       // todo: add error handling
-      });
+      }); 
+
     })
     body.append(newdiv);
   }
@@ -129,3 +138,5 @@ function createEntry(newdiv, deleteButton, editButton, diaryEntries) {
   deleteButton.innerHTML = 'Remove';
   editButton.innerHTML = 'Edit';
 }
+
+app();
