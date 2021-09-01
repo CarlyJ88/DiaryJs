@@ -1,0 +1,56 @@
+#edit-modal-background {
+  position: fixed; 
+  z-index: 999; 
+  left: 25%; 
+  height: 100%; 
+  width: 100%; 
+  top: 0; 
+  left: 0; 
+  background-color: rgba(0,0,0,0.5); 
+  display: flex; 
+  justify-content: center;
+  text-align: center;
+}
+
+#edit-form {
+  border: 3px solid #1e1e1f; 
+  background: #FFFAFA; 
+  width: 750px; 
+  height: 500px; 
+  position: absolute; 
+  top: 0%; text-align: center; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: space-evenly; 
+  top: 25%;
+}
+
+#close-form {
+  position: absolute; 
+  top: 0; 
+  right: 0;
+}
+
+#title-input2 {
+  width: 150px; 
+  /* position: relative;  */
+  background: #Fdfcfa;
+  right: 50%;
+}
+
+#text-area2 {
+  height: 150px; 
+  background: #Fdfcfa;
+  /* background: #FFFAFA;  */
+  width: 500px;
+}
+
+#submit2 {
+  width: 100px;
+  margin-bottom: 5px;
+}
+
+#input-div {
+  text-align: center;
+}

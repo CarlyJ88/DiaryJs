@@ -11,20 +11,18 @@ function getEntries() {
 }
 
 function createForm(modalDiv, form7, closeButton, titleLabel, titleInput2, myTextLabel, myTextArea2, submit2) {
-  modalDiv.id = 'modal';
-  modalDiv.style = 'position: fixed; z-index: 999; left: 25%; height: 100%; width: 100%; top: 0; left: 0; background-color: rgba(0,0,0,0.5); display: flex; justify-content: center;'
-  form7.style = 'border: 3px solid #1e1e1f; background: #FFFAFA; width: 750px; height: 500px; position: absolute; top: 0%; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; top: 25%'
-  closeButton.style = 'position: absolute; top: 0; right: 0';
-  closeButton.innerHTML = 'X'
+  modalDiv.id = 'edit-modal-background';
+  form7.id = 'edit-form';
+  closeButton.id = 'close-form';
+  titleInput2.id = 'title-input2'
+  myTextArea2.id = 'text-area2';
+  submit2.id = 'submit2';
+  closeButton.innerHTML = 'X';
   titleLabel.innerHTML = 'Title';
-  titleInput2.style = 'width: 150px; position relative; background: #Fdfcfa; right: 50%'
   myTextLabel.innerHTML = "Today's Thoughts";
-  myTextArea2.style = 'height: 150px; background: #Fdfcfa; width: 500px'
   titleInput.type = "text";
   submit2.type = "submit";
   submit2.value = "Send Request";
-  submit2.style = "width: 100px"
-  submit2.style = "margin-bottom: 5px";
   form7.append(closeButton);
   form7.append(titleLabel);
   form7.append(titleInput2);
@@ -44,6 +42,7 @@ form6.addEventListener('submit', (event) => {
     })
     .then(function (response) {
       const newdiv = document.createElement('div');
+      newdiv.id = 'input-div';
       let deleteButton = document.createElement('button');
       let editButton = document.createElement('button');
       combineEntry(newdiv, deleteButton, editButton, response.data);
@@ -67,6 +66,7 @@ function belongsTogether(element, item, newdiv) {
 function listEntries(diaryEntries) {
   for (let i = 0; i < diaryEntries.length; i++) {
     const newdiv = document.createElement('div');
+    newdiv.id = 'input-div';
     let deleteButton = document.createElement('button');
     let editButton = document.createElement('button');
 
@@ -77,6 +77,7 @@ function listEntries(diaryEntries) {
     editButton.addEventListener('click', (event) => {
       event.preventDefault();
       const modalDiv = document.createElement('div');
+      modalDiv.id = 'modal';
       const form7 = document.createElement('form');
       const closeButton = document.createElement('button');
       const titleLabel = document.createElement('label');
@@ -119,7 +120,7 @@ function listEntries(diaryEntries) {
 }
 
 function combineEntry(newdiv, deleteButton, editButton, diaryEntries) {
-  newdiv.style = "text-align: center";
+  // newdiv.style = "text-align: center";
   belongsTogether('cite', diaryEntries.title, newdiv);
   belongsTogether('pre', diaryEntries.entry, newdiv);
   belongsTogether('pre', diaryEntries.date, newdiv);
