@@ -34,7 +34,6 @@
 
 #title-input2 {
   width: 150px; 
-  /* position: relative;  */
   background: #Fdfcfa;
   right: 50%;
 }
@@ -42,7 +41,6 @@
 #text-area2 {
   height: 150px; 
   background: #Fdfcfa;
-  /* background: #FFFAFA;  */
   width: 500px;
 }
 
