@@ -1,5 +1,5 @@
 import { editEntry } from './service';
-import combineEntry from './entryDisplay';
+import createEntryDisplay from './createEntryDisplay';
 
 export function editEntryHandler(form, entries, newdiv) {
   form.addEventListener('submit', (event) => {
@@ -7,12 +7,7 @@ export function editEntryHandler(form, entries, newdiv) {
     const formDatas = new FormData(event.currentTarget);
     editEntry(formDatas.get('title'), formDatas.get('textArea'), entries.id)
       .then(function (response) {
-        const newdiv = document.createElement('div');
-        newdiv.id = 'input-div';
-        let deleteButton = document.createElement('button');
-        let editButton = document.createElement('button');
-        combineEntry(newdiv, deleteButton, editButton, response.data);
-        body.append(newdiv);
+        createEntryDisplay(response.data);
       })
       .then(() => {
         form.parentElement.remove();
