@@ -3,6 +3,7 @@ import { newEntryButton } from './addEntries';
 import { deleteEntryHandler } from './deleteEntries';
 import { editEntryHandler } from './editEntries';
 import createEntryPopup from './createEntryPopup';
+import combineEntry from './entryDisplay';
 
 function app() {
   newEntryButton();
@@ -36,22 +37,6 @@ function listEntries(diaryEntries) {
     })
     body.append(newdiv);
   }
-}
-
-function combineEntry(newdiv, deleteButton, editButton, diaryEntries) {
-  belongsTogether('cite', diaryEntries.title, newdiv);
-  belongsTogether('pre', diaryEntries.entry, newdiv);
-  belongsTogether('pre', diaryEntries.date, newdiv);
-  newdiv.append(deleteButton);
-  newdiv.append(editButton);
-  deleteButton.innerHTML = 'Remove';
-  editButton.innerHTML = 'Edit';
-}
-
-function belongsTogether(element, item, newdiv) {
-  let newElement = document.createElement(element);
-  newElement.append(item);
-  newdiv.append(newElement);
 }
 
 app();
