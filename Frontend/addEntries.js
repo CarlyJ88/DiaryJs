@@ -12,7 +12,7 @@ export function addEntryHandler(form) {
         createEntryDisplay(response.data);
       })
       .then(() => {
-        form.parentElement.remove();
+        form.parentElement.parentElement.remove();
       })
       .catch(function (error) {
         console.log(error);

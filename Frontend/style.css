@@ -13,16 +13,24 @@
 }
 
 #edit-form {
-  border: 3px solid #1e1e1f; 
   background: #FFFAFA; 
   width: 750px; 
   height: 500px; 
-  position: absolute; 
-  top: 0%; text-align: center; 
+  text-align: center; 
   display: flex; 
   flex-direction: column; 
   align-items: center; 
   justify-content: space-evenly; 
+}
+
+#modal {
+  border: 3px solid #1e1e1f; 
+  width: 750px; 
+  height: 500px; 
+  position: absolute; 
+  top: 0%;
+  display: flex;
+  text-align: center; 
   top: 25%;
 }
 

@@ -1,13 +1,11 @@
-// export function entryDiv() {
-//   const div = document.createElement('div');
-//   div.id = 'modal';
-//   return div;
-// }
-
 export function closeButton() {
   const closeButton = document.createElement('button');
   closeButton.id = 'close-form';
   closeButton.innerHTML = 'X';
+  closeButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    closeButton.parentElement.parentElement.remove();
+  }) 
   return closeButton;
 }
 
@@ -51,13 +49,16 @@ export default function createEntryPopup() {
   form.id = 'edit-form';
   const div = document.createElement('div');
   div.id = 'edit-modal-background';
-  form.append(closeButton());
+  const formDiv = document.createElement('div');
+  formDiv.id = 'modal';
+  formDiv.append(closeButton());
   form.append(entryLabel());
   form.append(entryTitle());
   form.append(myTextLabel());
   form.append(entryField());
   form.append(submitButton());
-  div.append(form);
+  formDiv.append(form);
+  div.append(formDiv);
   body.append(div);
   return form;
 }
