@@ -10,7 +10,7 @@ export function editEntryHandler(form, entries, newdiv) {
         createEntryDisplay(response.data);
       })
       .then(() => {
-        form.parentElement.remove();
+        form.parentElement.parentElement.remove();
         newdiv.remove();
       })
   // todo: add error handling
