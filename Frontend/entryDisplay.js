@@ -2,6 +2,7 @@ export default function combineEntry(newdiv, deleteButton, editButton, diaryEntr
   belongsTogether('cite', diaryEntries.title, newdiv);
   belongsTogether('pre', diaryEntries.entry, newdiv);
   belongsTogether('pre', diaryEntries.date, newdiv);
+  belongsTogether('pre', diaryEntries.edited, newdiv);
   newdiv.append(deleteButton);
   newdiv.append(editButton);
   deleteButton.innerHTML = 'Remove';

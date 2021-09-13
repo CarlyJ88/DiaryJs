@@ -12,7 +12,7 @@ interface EntriesSaved extends Entries {
 
 export async function listEntries(): Promise<EntriesSaved[]> {
   const entries = await executeQuery('SELECT * FROM entries', []);
-  return entries.rows.map((row: any) => ({ id: row.id, title: row.title, entry: row.entry, date: row.date,  }))
+  return entries.rows.map((row: any) => ({ id: row.id, title: row.title, entry: row.entry, date: row.date, edited: row.edited }))
 }
 
 export async function addEntry(entries: Entries): Promise<EntriesSaved> {
