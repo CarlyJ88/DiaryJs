@@ -1,8 +1,10 @@
 export default function combineEntry(newdiv, deleteButton, editButton, diaryEntries) {
+  const date = new Date(diaryEntries.date);
+  const edited = new Date(diaryEntries.edited);
   belongsTogether('cite', diaryEntries.title, newdiv);
   belongsTogether('pre', diaryEntries.entry, newdiv);
-  belongsTogether('pre', diaryEntries.date, newdiv);
-  belongsTogether('pre', diaryEntries.edited, newdiv);
+  belongsTogether('pre', date.toLocaleDateString(), newdiv);
+  belongsTogether('pre', edited.toLocaleDateString(), newdiv);
   newdiv.append(deleteButton);
   newdiv.append(editButton);
   deleteButton.innerHTML = 'Remove';
