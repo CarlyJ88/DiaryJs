@@ -32,6 +32,7 @@
   display: flex;
   text-align: center; 
   top: 25%;
+  /* color: white; */
 }
 
 #close-form {
@@ -40,10 +41,17 @@
   right: 0;
 }
 
+#title-input {
+  width: 150px; 
+  right: 50%;
+  font-weight: bold;
+}
+
 #title-input2 {
   width: 150px; 
   background: #Fdfcfa;
   right: 50%;
+  font-weight: bold;
 }
 
 #text-area2 {
@@ -59,4 +67,84 @@
 
 #input-div {
   text-align: center;
+  /* background:  #E0FFFF; */
+  color: white;
+  /* margin: 50px auto; not this */
+  /* max-width: 500px; */
+  padding: 25px;
+}
+
+#add-form {
+  /* background-color: blue; */
+  background-color: pink;
+  border: white solid 3px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  display: grid;
+  /* margin: 100px auto; */
+  margin: 0px auto;
+  position: relative;
+  top: 90px;
+}
+
+body {
+  /* background: #FFFAFA; */
+  /* background: #00BFFF; */
+  background: #af9dff;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  top: 0;
+   left: 0;
+}
+
+#header {
+  /* background: darkblue; */
+  background: pink;
+  color: white;
+  font-size: 38px;
+  border: white solid 5px;
+  /* height: 50px; */
+  /* margin-bottom: 1rem; */
+  box-shadow: 0 3px 7px 0 rgb(0 0 0 / 25%);
+  /* display: block; */
+  /* width: 100%; */
+  text-align: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+#delete-button {
+  text-decoration: none;
+  display: inline-block;
+  background-color: pink;
+  border: white solid 3px;
+  color: white;
+  margin: 5px;
+}
+
+#edit-button {
+  text-decoration: none;
+  display: inline-block;
+  background-color: pink;
+  border: white solid 3px;
+  color: white;
+}
+
+html {
+  /* width: max-content; */
+  padding: 0;
+  margin: 0;
+  top: 0;
+   left: 0;
+}
+
+* {
+  box-sizing: border-box;
 }

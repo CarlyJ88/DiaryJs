@@ -23,7 +23,7 @@ export function addEntryHandler(form) {
 export function newEntryButton() {
   const addEntryButton = document.createElement('button');
   addEntryButton.id = 'add-form';
-  addEntryButton.innerHTML = 'Add Entry';
+  addEntryButton.innerHTML = 'Add';
   body.append(addEntryButton);
 
   addEntryButton.addEventListener('click', (event) => {
