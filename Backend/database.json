@@ -1,0 +1,7 @@
+{
+  "dev": {
+    "driver": "pg",
+    "user": "carlyjenkinson",
+    "database": "diary"
+  }
+}
