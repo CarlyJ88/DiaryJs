@@ -41,10 +41,14 @@
   right: 0;
 }
 
-#title-input {
+#title {
   width: 150px; 
   right: 50%;
   font-weight: bold;
+}
+
+#date {
+  color: green;
 }
 
 #title-input2 {
@@ -88,7 +92,7 @@
   /* margin: 100px auto; */
   margin: 0px auto;
   position: relative;
-  top: 90px;
+  /* top: 90px; */
 }
 
 body {
@@ -99,11 +103,13 @@ body {
   padding: 0;
   margin: 0;
   top: 0;
-   left: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  margin-top: 50px;
 }
 
 #header {
-  /* background: darkblue; */
   background: pink;
   color: white;
   font-size: 38px;
@@ -111,13 +117,12 @@ body {
   /* height: 50px; */
   /* margin-bottom: 1rem; */
   box-shadow: 0 3px 7px 0 rgb(0 0 0 / 25%);
-  /* display: block; */
-  /* width: 100%; */
   text-align: center;
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
+  margin: 0;
 }
 
 #delete-button {
@@ -142,9 +147,43 @@ html {
   padding: 0;
   margin: 0;
   top: 0;
-   left: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 * {
   box-sizing: border-box;
+}
+
+#show-entries {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: block;
+}
+
+.diary-item {
+  /* background-color: brown; */
+  /* height: 50px;
+  width: 50px; */
+  display: flex;
+  flex-direction: row;
+  padding-left: 25px;
+  color: white;
+}
+
+.diary-item .item-date {
+  display: block;
+  text-decoration: none;
+  padding: 5px;
+  /* background-color: black; */
+
+}
+
+.diary-item .item-entry {
+  display: block;
+  text-decoration: none;
+  padding: 5px;
 }
