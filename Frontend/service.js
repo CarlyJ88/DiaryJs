@@ -7,10 +7,11 @@ export function getEntries() {
     .then(res => res.data)
 }
 
-export function addEntry(title, entry) {
+export function addEntry(title, entry, category) {
   return axios.post(`http://${base}:4000/add-entry`, {
     title: title,
-    entry: entry
+    entry: entry,
+    category: category
   })
 }
 
@@ -23,10 +24,11 @@ export function deleteEntry(id) {
   })
 }
 
-export function editEntry(title, entry, id) {
+export function editEntry(title, entry, category, id) {
   return axios.put(`http://${base}:4000/edit-entry`, {
       title: title,
       entry: entry,
+      category: category,
       id: id
   })
 }
