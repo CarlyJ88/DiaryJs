@@ -1,3 +1,89 @@
+* {
+  box-sizing: border-box;
+}
+
+#add-form {
+  background-color: pink;
+  border: white solid 3px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  display: grid;
+  margin: 0px auto;
+  position: relative;
+}
+
+body {
+  background-color: white;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#close-form {
+  position: absolute; 
+  top: 0; 
+  right: 0;
+}
+
+#date {
+  margin-left: 15px;
+  margin-top: 35px;
+  margin-bottom: 25px;
+}
+
+#delete-button {
+  text-decoration: none;
+  display: inline-block;
+  background-color: pink;
+  border: white solid 3px;
+  color: white;
+  margin: 5px;
+}
+
+.diary-item {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  color: black;
+}
+
+.diary-item .item-entry {
+  display: block;
+  text-decoration: none;
+  padding: 5px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left;
+  width: 100%;
+}
+
+#edit-button {
+  text-decoration: none;
+  display: inline-block;
+  background-color: pink;
+  border: white solid 3px;
+  color: white;
+}
+
+#edit-form {
+  background: #FFFAFA; 
+  width: 750px; 
+  height: 500px; 
+  text-align: center; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: space-evenly; 
+}
+
 #edit-modal-background {
   position: fixed; 
   z-index: 999; 
@@ -12,134 +98,30 @@
   text-align: center;
 }
 
-#edit-form {
-  background: #FFFAFA; 
-  width: 750px; 
-  height: 500px; 
-  text-align: center; 
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  justify-content: space-evenly; 
+/* #header-back-button {
+  background: blue;
+} */
+
+#header-new-item-button {
+  float: right;
+  margin-right: 10px;
 }
 
-#modal {
-  border: 3px solid #1e1e1f; 
-  width: 750px; 
-  height: 500px; 
-  position: absolute; 
-  top: 0%;
+#header-title {
+  /* position: relative; */
+  margin: 0;
+}
+
+.headers {
+  background: lightgray;
+  color: black;
+  font-size: 24px;
+  height: 50px;
+  /* width: 100%; */
   display: flex;
-  text-align: center; 
-  top: 25%;
-  /* color: white; */
-}
-
-#close-form {
-  position: absolute; 
-  top: 0; 
-  right: 0;
-}
-
-#title {
-  width: 150px; 
-  right: 50%;
-  font-weight: bold;
-}
-
-#date {
-  color: green;
-}
-
-#title-input2 {
-  width: 150px; 
-  background: #Fdfcfa;
-  right: 50%;
-  font-weight: bold;
-}
-
-#text-area2 {
-  height: 150px; 
-  background: #Fdfcfa;
-  width: 500px;
-}
-
-#submit2 {
-  width: 100px;
-  margin-bottom: 5px;
-}
-
-#input-div {
-  text-align: center;
-  /* background:  #E0FFFF; */
-  color: white;
-  /* margin: 50px auto; not this */
-  /* max-width: 500px; */
-  padding: 25px;
-}
-
-#add-form {
-  /* background-color: blue; */
-  background-color: pink;
-  border: white solid 3px;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  display: grid;
-  /* margin: 100px auto; */
-  margin: 0px auto;
-  position: relative;
-  /* top: 90px; */
-}
-
-body {
-  /* background: #FFFAFA; */
-  /* background: #00BFFF; */
-  background: #af9dff;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  margin-top: 50px;
-}
-
-#header {
-  background: pink;
-  color: white;
-  font-size: 38px;
-  border: white solid 5px;
-  /* height: 50px; */
-  /* margin-bottom: 1rem; */
-  box-shadow: 0 3px 7px 0 rgb(0 0 0 / 25%);
-  text-align: center;
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  margin: 0;
-}
-
-#delete-button {
-  text-decoration: none;
-  display: inline-block;
-  background-color: pink;
-  border: white solid 3px;
-  color: white;
-  margin: 5px;
-}
-
-#edit-button {
-  text-decoration: none;
-  display: inline-block;
-  background-color: pink;
-  border: white solid 3px;
-  color: white;
+  align-items: center;
+  /* gap: 10px; */
+  justify-content: space-between;
 }
 
 html {
@@ -152,8 +134,21 @@ html {
   height: 100%;
 }
 
-* {
-  box-sizing: border-box;
+#input-div {
+  text-align: center;
+  color: white;
+  padding: 25px;
+}
+
+#modal {
+  border: 3px solid #1e1e1f; 
+  width: 750px; 
+  height: 500px; 
+  position: absolute; 
+  top: 0%;
+  display: flex;
+  text-align: center; 
+  top: 25%;
 }
 
 #show-entries {
@@ -161,29 +156,32 @@ html {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  display: block;
-}
-
-.diary-item {
-  /* background-color: brown; */
-  /* height: 50px;
-  width: 50px; */
   display: flex;
-  flex-direction: row;
-  padding-left: 25px;
-  color: white;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
-.diary-item .item-date {
-  display: block;
-  text-decoration: none;
-  padding: 5px;
-  /* background-color: black; */
-
+#submit2 {
+  width: 100px;
+  margin-bottom: 5px;
 }
 
-.diary-item .item-entry {
-  display: block;
-  text-decoration: none;
-  padding: 5px;
+#title {
+  width: 150px; 
+  right: 50%;
+  font-weight: bold;
+}
+
+#text-area2 {
+  height: 150px; 
+  background: #Fdfcfa;
+  width: 500px;
+}
+
+#title-input2 {
+  width: 150px; 
+  background: #Fdfcfa;
+  right: 50%;
+  font-weight: bold;
 }

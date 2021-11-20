@@ -7,6 +7,7 @@ import {
 import createEntryPopup from './createEntryPopup';
 
 export default function createEntryDisplay(entry) {
+  console.log('createEntryDisplay')
   const newdiv = document.createElement('div');
   newdiv.id = 'input-div';
   let deleteButton = document.createElement('button');
