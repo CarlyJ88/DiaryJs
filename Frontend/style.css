@@ -49,21 +49,24 @@ body {
 }
 
 .diary-item {
-  display: flex;
-  flex-direction: row;
   padding: 5px;
   color: black;
+  display: flex;
+  flex-direction: column;
+  /* width: calc(100% - 30px); */
+  width: 100%;
+  height: 150px;
 }
 
-.diary-item .item-entry {
-  display: block;
-  text-decoration: none;
-  padding: 5px;
-  display: table-cell;
-  vertical-align: middle;
-  text-align: left;
-  width: 100%;
-}
+/* .diary-item .item-entry { */
+  /* display: block; */
+  /* text-decoration: none; */
+  /* padding: 5px; */
+  /* display: table-cell; */
+  /* vertical-align: middle; */
+  /* text-align: left; */
+  /* width: 100%; */
+/* } */
 
 #edit-button {
   text-decoration: none;
@@ -103,25 +106,22 @@ body {
 } */
 
 #header-new-item-button {
-  float: right;
   margin-right: 10px;
 }
 
-#header-title {
-  /* position: relative; */
-  margin: 0;
-}
+/* #header-title {
+} */
 
-.headers {
+.header {
   background: lightgray;
   color: black;
   font-size: 24px;
   height: 50px;
-  /* width: 100%; */
   display: flex;
   align-items: center;
-  /* gap: 10px; */
   justify-content: space-between;
+  /* width: 100%; */
+  /* gap: 10px; */
 }
 
 html {
@@ -154,7 +154,7 @@ html {
 #show-entries {
   list-style-type: none;
   margin: 0;
-  padding: 0;
+  padding: 15px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -167,11 +167,11 @@ html {
   margin-bottom: 5px;
 }
 
-#title {
+/* #title {
   width: 150px; 
   right: 50%;
   font-weight: bold;
-}
+} */
 
 #text-area2 {
   height: 150px; 

@@ -21,12 +21,11 @@ function listEntries(diaryEntries) {
   for (let i = 0; i < diaryEntries.length; i++) {
     const fixDate = new Date(diaryEntries[i].date) // Fri Nov 19 2021 19:18:19 GMT+0000 (Greenwich Mean Time)
     const month = fixDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
-
-    console.log(month, 'month')
     date.innerHTML = month;
-    // createEntryDisplay(diaryEntries[i]);
-    listEntriesPage(diaryEntries[i], list);
+    list.append(listEntriesPage(diaryEntries[i]));
   }
+  
+  body.append(list);
 }
 
 app();

@@ -3,7 +3,7 @@ import write from './new.png';
 
 const title = () => {
   let title = document.createElement('h2');
-  title.id = 'header-title'
+  // title.id = 'header-title'
   title.innerHTML = "Something";
   return title;
 }
@@ -14,7 +14,7 @@ const backButton = () => {
   backButton.alt = "Back button";
   backButton.width = 40;
   backButton.height = 40;
-  backButton.id = 'header-back-button'
+  // backButton.id = 'header-back-button'
   return backButton;
 }
 
@@ -29,10 +29,10 @@ const newItemButton = () => {
 }
 
 export default function header() {
-  const headers = document.createElement('div');
-  headers.className = 'headers';
-  headers.append(backButton());
-  headers.append(title());
-  headers.append(newItemButton());
-  body.append(headers);
+  const header = document.createElement('div');
+  header.className = 'header';
+  header.append(backButton());
+  header.append(title());
+  header.append(newItemButton());
+  body.append(header);
 }
