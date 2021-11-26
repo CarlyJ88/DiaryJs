@@ -4,9 +4,9 @@ CREATE TABLE categories(
   colour_code TEXT NOT NULL
 );
 
-insert into categories values (1,'CSS', 'pink');
-insert into categories values (2,'Design Patterns', 'red');
-insert into categories values (3,'Clean Code', 'blue');
+insert into categories values (1,'CSS', '149, 16, 172');
+insert into categories values (2,'Design Patterns', '242, 71, 38');
+insert into categories values (3,'Clean Code', '65, 75, 178');
 
 alter table entries add column category_id INTEGER;
 
