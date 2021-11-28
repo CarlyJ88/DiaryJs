@@ -4,7 +4,8 @@ import write from './new.png';
 const title = () => {
   let title = document.createElement('h2');
   // title.id = 'header-title'
-  title.innerHTML = "Something";
+  title.innerHTML = "Plan";
+  // title.style.fontSize = '24px';
   return title;
 }
 
