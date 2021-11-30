@@ -11,7 +11,8 @@ export function addEntry(title, entry, category_id) {
   return axios.post(`http://${base}:4000/add-entry`, {
     title: title,
     entry: entry,
-    categoryId: category_id
+    categoryId: category_id,
+    link: link
   })
 }
 
@@ -29,6 +30,7 @@ export function editEntry(title, entry, category_id, id) {
       title: title,
       entry: entry,
       category_id: category_id,
+      link,
       id: id
   })
 }

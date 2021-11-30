@@ -7,6 +7,7 @@ CREATE TABLE categories(
 insert into categories values (1,'CSS', '149, 16, 172');
 insert into categories values (2,'Design Patterns', '242, 71, 38');
 insert into categories values (3,'Clean Code', '65, 75, 178');
+insert into categories values (4,'Lorem Ipsum', '33, 41, 48');
 
 alter table entries add column category_id INTEGER;
 
