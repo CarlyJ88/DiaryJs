@@ -1,7 +1,8 @@
 
 import listEntriesPage from './views/listEntriesPage';
 import header from './header';
-import chooseCategory from './views/chooseCategory';
+import chooseCategory from './views/chooseCategoryPage';
+import showEntryPage from './views/showEntryPage';
 
 import "regenerator-runtime/runtime.js";
 
@@ -28,6 +29,7 @@ const router = async () => {
       // { path: "/", view: Dashboard },
       { path: "/choose", view: chooseCategory },
       { path: "/list", view: listEntriesPage },
+      { path: "/show", view: showEntryPage },
   ];
 
   // Test each route for potential match
