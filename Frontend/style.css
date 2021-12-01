@@ -77,6 +77,14 @@ html {
   height: 100%;
 }
 
+.item-entry {
+  overflow: hidden;
+  margin-block-start: 0em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
 #show-entries {
   list-style-type: none;
   margin: 0;

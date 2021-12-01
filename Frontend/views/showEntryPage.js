@@ -23,7 +23,7 @@ const createItemTitle = (entry) => {
 
 const createItemEntry = (entry) => {
   const itemEntry = document.createElement('p');
-  itemEntry.className = 'item-entry';
+  itemEntry.className = 'show-item-entry';
   itemEntry.innerHTML = entry.entry;
   return itemEntry;
 }
