@@ -3,6 +3,7 @@ import listEntriesPage from './views/listEntriesPage';
 import header from './header';
 import chooseCategory from './views/chooseCategoryPage';
 import showEntryPage from './views/showEntryPage';
+import createEntryPage from './views/createEntryPage';
 
 import "regenerator-runtime/runtime.js";
 
@@ -26,10 +27,11 @@ const navigateTo = url => {
 
 const router = async () => {
   const routes = [
-      // { path: "/", view: Dashboard },
+    //   { path: "/", view: Dashboard },
       { path: "/choose", view: chooseCategory },
       { path: "/list", view: listEntriesPage },
       { path: "/show", view: showEntryPage },
+      { path: "/new", view: createEntryPage },
   ];
 
   // Test each route for potential match

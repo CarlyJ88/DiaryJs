@@ -1,5 +1,5 @@
 import { editEntry } from './service';
-import createEntryDisplay from './createEntryDisplay';
+import createEntryDisplay from './views/createEntryPage';
 
 export function editEntryHandler(form, entries, newdiv) {
   form.addEventListener('submit', (event) => {
