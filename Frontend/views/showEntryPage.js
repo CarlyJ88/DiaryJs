@@ -1,12 +1,16 @@
 import { showEntryHandler } from '../showEntries';
 
+var showdown  = require('showdown'),
+    converter = new showdown.Converter({metadata: true}),
+    text      = '# this is a title \n * bulletpoint 1 \n * bulletpoint 2 \n* bulletpoint 3',
+    html      = converter.makeHtml(text); // <h1 id="hellomarkdown">hello, markdown!</h1>
 
 export default function getEntries() {
   showEntryHandler()
     .then(showEntry);
 }
 
-const createDiaryItem = (entry) => {
+const createDiaryItem = () => {
   const item = document.createElement('li');
   item.style.height = 'auto';
   item.className = 'diary-item';
@@ -24,7 +28,11 @@ const createItemTitle = (entry) => {
 const createItemEntry = (entry) => {
   const itemEntry = document.createElement('p');
   itemEntry.className = 'show-item-entry';
-  itemEntry.innerHTML = entry.entry;
+
+  console.log(entry.entry);
+  html = converter.makeHtml(entry.entry);
+  console.log(html, 'html');
+  itemEntry.innerHTML = html;
   return itemEntry;
 }
 
@@ -36,11 +44,11 @@ const createItemLinkToArticle = () => {
 } // temporary until markdown module is implemented
 
 function showEntry(diaryEntries) {
-  const list = document.createElement('ul');
+  const list = document.createElement('div');
   list.id = 'show-entries';
   
   for (let i = 0; i < diaryEntries.length; i++) {
-    if (diaryEntries[i].id === 7) {
+    if (diaryEntries[i].id === 25) {
       list.append(showEntryPage(diaryEntries[i]));
   }
 }
@@ -49,7 +57,7 @@ function showEntry(diaryEntries) {
 }
 
 function showEntryPage(entry) {
-  const item = createDiaryItem(entry);
+  const item = createDiaryItem();
   const itemTitle = createItemTitle(entry);
   const itemEntry = createItemEntry(entry);
   const linkToArticle = createItemLinkToArticle();

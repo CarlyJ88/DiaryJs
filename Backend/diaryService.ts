@@ -19,8 +19,8 @@ export async function listEntries(): Promise<EntriesSaved[]> {
 }
 
 export async function addEntry(entries: Entries): Promise<EntriesSaved> {
-  const entry = await executeQuery('INSERT INTO entries(title, entry, link) VALUES($1, $2, $3, $4) RETURNING *', [entries.title, entries.entry, entries.categoryId, entries.link]);
-  return { id: entry.rows[0].id, title: entry.rows[0].title, entry: entry.rows[0].entry, categoryId: entry.rows[0].category_id, date: entry.rows[0].date, edited: entry.rows[0].edited, link: entry.rows[0].link };
+  const entry = await executeQuery('INSERT INTO entries(title, entry, category_id, link) VALUES($1, $2, $3, $4) RETURNING *', [entries.title, entries.entry, entries.categoryId, entries.link]);
+  return { id: entry.rows[0].id, title: entry.rows[0].title, entry: entry.rows[0].entry, categoryId: entry.rows[0].category_id, link: entry.rows[0].link, date: entry.rows[0].date, edited: entry.rows[0].edited };
 }
 
 export async function deleteEntry(id: number): Promise<void> {
@@ -28,6 +28,6 @@ export async function deleteEntry(id: number): Promise<void> {
 }
 
 export async function editEntry(entries: EntriesSaved): Promise<EntriesSaved> {
-  const entry = await executeQuery('UPDATE entries SET title = $1, entry = $2, category = $3, edited = CURRENT_DATE WHERE id = $3 RETURNING *', [entries.title, entries.entry, entries.categoryId, entries.id]);
-  return { id: entry.rows[0].id, title: entry.rows[0].title, entry: entry.rows[0].entry, categoryId: entry.rows[0].category_id, date: entry.rows[0].date, edited: entry.rows[0].edited, link: entry.rows[0].link };
+  const entry = await executeQuery('UPDATE entries SET title = $1, entry = $2, category_id = $3, link = $4, edited = CURRENT_DATE WHERE id = $5 RETURNING *', [entries.title, entries.entry, entries.categoryId, entries.link, entries.id]);
+  return { id: entry.rows[0].id, title: entry.rows[0].title, entry: entry.rows[0].entry, categoryId: entry.rows[0].category_id, link: entry.rows[0].link, date: entry.rows[0].date, edited: entry.rows[0].edited };
 }
