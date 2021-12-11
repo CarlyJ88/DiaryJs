@@ -48,7 +48,7 @@ function showEntry(diaryEntries) {
   list.id = 'show-entries';
   
   for (let i = 0; i < diaryEntries.length; i++) {
-    if (diaryEntries[i].id === 25) {
+    if (diaryEntries[i].id === 46) {
       list.append(showEntryPage(diaryEntries[i]));
   }
 }
