@@ -1,11 +1,14 @@
 import express from "express";
 import {listEntries, addEntry, deleteEntry, editEntry} from "./diaryService";
-import cors from "cors"
+import cors from "cors";
+import path from"path";
 
 const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cors())
+
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get('/list', async(req, res) =>{
   res.json(await listEntries())
