@@ -1,5 +1,8 @@
 * {
   box-sizing: border-box;
+  border: none;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -12,6 +15,90 @@ body {
   left: 0;
   height: 100%;
   width: 100%;
+}
+
+.Calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 50px);
+  grid-template-rows: 30px;
+  grid-auto-rows: 50px;
+  text-align: center;
+  background-color: #222021;
+  color: #d9dddc;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.Calendar-controls {
+  background-color: #222021;
+  color: #d9dddc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+}
+
+.Calendar-day {
+
+}
+
+.Calendar-day.is-monday {
+  grid-column-start: 1;
+}
+
+.Calendar-day.is-tuesday {
+  grid-column-start: 2;
+}
+
+.Calendar-day.is-wednesday {
+  grid-column-start: 3;
+}
+
+.Calendar-day.is-thursday {
+  grid-column-start: 4;
+}
+
+.Calendar-day.is-friday {
+  grid-column-start: 5;
+}
+
+.Calendar-day.is-saturday {
+  grid-column-start: 6;
+}
+
+.Calendar-day.is-sunday {
+  grid-column-start: 7;
+}
+
+.Calendar-nextButton {
+  background-color: #222021;
+  color: #d9dddc;
+  grid-column: 2;
+  font-size: 24px; /* change to em */
+}
+
+.Calendar-prevButton {
+  background-color: #222021;
+  color: #d9dddc;
+  grid-column: 1;
+  font-size: 24px; /* change to em */
+}
+
+.Calendar-month {
+  grid-column: 3 / span 3;
+  font-size: 24px; /* change to em */
+  margin: 10px;
+}
+.Calendar-weekday {
+  /* grid-auto-rows: 30px; */
+}
+
+.Calendar-year {
+  grid-column: 6 / span 2;
+  /* background-color: pink; */
+  font-size: 24px; /* change to em */
+  margin: 10px;
 }
 
 #category-button {
