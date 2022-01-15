@@ -71,6 +71,10 @@ body {
   grid-column-start: 7;
 }
 
+.Calendar-day.is-today {
+  background: blue;
+}
+
 .Calendar-nextButton {
   background-color: #222021;
   color: #d9dddc;
