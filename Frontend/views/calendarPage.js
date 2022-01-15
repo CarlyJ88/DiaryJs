@@ -3,10 +3,6 @@ function numberOfDaysArray(year, month) {
     Array(new Date(year, month + 1, 0).getDate()),
     (x, y) => y + 1
   );
-  // return Array(new Date(year, month + 1, 0).getDate());
-  // Array(new Date(2022, date.getMonth() + 1, 0).getDate());
-
-  // Array.from(numberOfDaysArray(2022, date.getMonth()), (x, y) => y + 1);
 }
 
 function calculateFirstDayOfTheMonth(dayOfTheWeek) {
@@ -43,15 +39,15 @@ export default function calendar() {
   month.className = "Calendar-month";
   const date = new Date();
   const firstDay = new Date(2022, 0, 1);
-  const dayOfTheWeek = 0; // firstDay.getDay();
+  const dayOfTheWeek = firstDay.getDay();
   const today = date.getDate();
   const currentMonth = date.toLocaleString("default", { month: "long" });
-  // month.innerHTML = currentMonth; // come from argument
+  month.innerHTML = currentMonth;
 
   const year = document.createElement("div");
   year.className = "Calendar-year";
   const currentYear = date.getFullYear();
-  // year.innerHTML = currentYear; // come from argument
+  year.innerHTML = currentYear;
 
   const calendar = document.createElement("div");
   calendar.className = "Calendar";
@@ -68,9 +64,6 @@ export default function calendar() {
   getDays(date.getMonth(), 2022);
 
   function getDays(month2, year2) {
-    month.innerHTML = month2;
-    year.innerHTML = year2;
-
     numberOfDaysArray(year2, month2).forEach((dayy, index) => {
       const day = document.createElement("div");
       day.className = "Calendar-day";
