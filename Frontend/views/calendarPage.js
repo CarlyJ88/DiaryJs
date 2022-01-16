@@ -68,13 +68,10 @@ export default function calendar() {
       const day = document.createElement("div");
       day.className = "Calendar-day";
       day.innerHTML = dayy;
-
-      if (dayy === today) {
-        day.className = "Calendar-day is-today";
-      }
       return day;
     });
 
+    days[today - 1].className += " is-today";
     days[0].className += calculateFirstDayOfTheMonth(dayOfTheWeek);
     calendar.append(...days);
   }
