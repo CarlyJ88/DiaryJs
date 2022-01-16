@@ -21,6 +21,26 @@ function calculateFirstDayOfTheMonth(dayOfTheWeek) {
   return firstDayOfTheMonth;
 }
 
+function createButton(direction, symbol, handler) {
+  const button = document.createElement("button");
+  button.className = `Calendar-${direction}Button`;
+  button.innerHTML = symbol;
+  button.addEventListener("click", handler);
+  return button;
+}
+
+function prevHandler(event) {
+  event.preventDefault();
+  console.log("previous button was clicked!");
+  // return
+}
+
+function nextHandler(event) {
+  event.preventDefault();
+  console.log("next button was clicked!");
+  // return
+}
+
 function getDays(month, year) {
   const date = new Date();
   const today = date.getDate();
@@ -42,14 +62,8 @@ export default function calendar() {
   calendarControls.className = "Calendar-controls";
 
   const buttonContainer = document.createElement("div");
-
-  const prevButton = document.createElement("button");
-  prevButton.className = "Calendar-prevButton";
-  prevButton.innerHTML = "<"; //
-
-  const nextButton = document.createElement("button");
-  nextButton.className = "Calendar-prevButton";
-  nextButton.innerHTML = ">";
+  const prevButton = createButton("prev", "<", prevHandler);
+  const nextButton = createButton("next", ">", nextHandler);
 
   const month = document.createElement("div");
   month.className = "Calendar-month";
@@ -76,16 +90,6 @@ export default function calendar() {
   // console.log(date.getMonth, "date", date.getMonth + 1, "date +1");
   const days = getDays(date.getMonth(), date.getYear());
   calendar.append(...days);
-
-  prevButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    console.log("previous button was clicked!");
-  });
-
-  nextButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    console.log("next button was clicked!");
-  });
 
   buttonContainer.appendChild(prevButton);
   buttonContainer.appendChild(nextButton);
