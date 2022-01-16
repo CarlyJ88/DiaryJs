@@ -64,9 +64,7 @@ export default function calendar() {
   getDays(date.getMonth(), 2022);
 
   function getDays(month2, year2) {
-    const days = [];
-
-    numberOfDaysArray(year2, month2).forEach((dayy, index) => {
+    const days = numberOfDaysArray(year2, month2).map((dayy, index) => {
       const day = document.createElement("div");
       day.className = "Calendar-day";
       day.innerHTML = dayy;
@@ -79,7 +77,7 @@ export default function calendar() {
       }
 
       day.className += firstDayOfTheMonth;
-      days.push(day);
+      return day;
     });
     calendar.append(...days);
   }
