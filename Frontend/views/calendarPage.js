@@ -21,12 +21,12 @@ function calculateFirstDayOfTheMonth(dayOfTheWeek) {
   return firstDayOfTheMonth;
 }
 
-function getDays(month2, year2) {
+function getDays(month, year) {
   const date = new Date();
   const today = date.getDate();
-  const firstDay = new Date(year2, month2, 1);
+  const firstDay = new Date(year, month, 1);
   const dayOfTheWeek = firstDay.getDay();
-  const days = numberOfDaysArray(year2, month2).map((dayy) => {
+  const days = numberOfDaysArray(year, month).map((dayy) => {
     const day = document.createElement("div");
     day.className = "Calendar-day";
     day.innerHTML = dayy;
