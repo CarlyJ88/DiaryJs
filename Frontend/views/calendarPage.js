@@ -64,21 +64,18 @@ export default function calendar() {
   getDays(date.getMonth(), 2022);
 
   function getDays(month2, year2) {
-    const days = numberOfDaysArray(year2, month2).map((dayy, index) => {
+    const days = numberOfDaysArray(year2, month2).map((dayy) => {
       const day = document.createElement("div");
       day.className = "Calendar-day";
       day.innerHTML = dayy;
 
-      const firstDayOfTheMonth =
-        index === 0 ? calculateFirstDayOfTheMonth(dayOfTheWeek) : "";
-
       if (dayy === today) {
         day.className = "Calendar-day is-today";
       }
-
-      day.className += firstDayOfTheMonth;
       return day;
     });
+
+    days[0].className += calculateFirstDayOfTheMonth(dayOfTheWeek);
     calendar.append(...days);
   }
 
