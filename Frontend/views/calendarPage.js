@@ -60,10 +60,12 @@ export default function calendar() {
     calendar.appendChild(weekday);
   });
 
-  // numberOfDaysArray(2022, date.getMonth());
+  console.log(date.getMonth, "date", date.getMonth + 1, "date +1");
   getDays(date.getMonth(), 2022);
 
   function getDays(month2, year2) {
+    const days = [];
+
     numberOfDaysArray(year2, month2).forEach((dayy, index) => {
       const day = document.createElement("div");
       day.className = "Calendar-day";
@@ -77,9 +79,9 @@ export default function calendar() {
       }
 
       day.className += firstDayOfTheMonth;
-
-      calendar.appendChild(day);
+      days.push(day);
     });
+    calendar.append(...days);
   }
 
   prevButton.addEventListener("click", (event) => {
