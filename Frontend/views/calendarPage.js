@@ -16,7 +16,7 @@ function calculateFirstDayOfTheMonth(dayOfTheWeek) {
     "saturday",
   ];
 
-  const firstDayOfTheMonth = ` is-${weekDays[dayOfTheWeek]}`;
+  const firstDayOfTheMonth = `is-${weekDays[dayOfTheWeek]}`;
 
   return firstDayOfTheMonth;
 }
@@ -70,9 +70,8 @@ export default function calendar() {
       day.innerHTML = dayy;
       return day;
     });
-
-    days[today - 1].className += " is-today";
-    days[0].className += calculateFirstDayOfTheMonth(dayOfTheWeek);
+    days[today - 1].classList.add("is-today");
+    days[0].classList.add(calculateFirstDayOfTheMonth(dayOfTheWeek));
     calendar.append(...days);
   }
 
