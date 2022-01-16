@@ -21,6 +21,22 @@ function calculateFirstDayOfTheMonth(dayOfTheWeek) {
   return firstDayOfTheMonth;
 }
 
+function getDays(month2, year2) {
+  const date = new Date();
+  const today = date.getDate();
+  const firstDay = new Date(year2, month2, 1);
+  const dayOfTheWeek = firstDay.getDay();
+  const days = numberOfDaysArray(year2, month2).map((dayy) => {
+    const day = document.createElement("div");
+    day.className = "Calendar-day";
+    day.innerHTML = dayy;
+    return day;
+  });
+  days[today - 1].classList.add("is-today");
+  days[0].classList.add(calculateFirstDayOfTheMonth(dayOfTheWeek));
+  return days;
+}
+
 export default function calendar() {
   const calendarControls = document.createElement("div");
   calendarControls.className = "Calendar-controls";
@@ -38,9 +54,6 @@ export default function calendar() {
   const month = document.createElement("div");
   month.className = "Calendar-month";
   const date = new Date();
-  const firstDay = new Date(2022, 0, 1);
-  const dayOfTheWeek = firstDay.getDay();
-  const today = date.getDate();
   const currentMonth = date.toLocaleString("default", { month: "long" });
   month.innerHTML = currentMonth;
 
@@ -60,20 +73,9 @@ export default function calendar() {
     calendar.appendChild(weekday);
   });
 
-  console.log(date.getMonth, "date", date.getMonth + 1, "date +1");
-  getDays(date.getMonth(), 2022);
-
-  function getDays(month2, year2) {
-    const days = numberOfDaysArray(year2, month2).map((dayy) => {
-      const day = document.createElement("div");
-      day.className = "Calendar-day";
-      day.innerHTML = dayy;
-      return day;
-    });
-    days[today - 1].classList.add("is-today");
-    days[0].classList.add(calculateFirstDayOfTheMonth(dayOfTheWeek));
-    calendar.append(...days);
-  }
+  // console.log(date.getMonth, "date", date.getMonth + 1, "date +1");
+  const days = getDays(date.getMonth(), date.getYear());
+  calendar.append(...days);
 
   prevButton.addEventListener("click", (event) => {
     event.preventDefault();
