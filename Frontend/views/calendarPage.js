@@ -36,6 +36,35 @@ function createDateDiv(fullDate, dateClass) {
   return text;
 }
 
+function createCalendarControls(date) {
+  const calendarControls = document.createElement("div");
+  calendarControls.className = "Calendar-controls";
+  const buttonContainer = document.createElement("div");
+  const fullMonth = date.toLocaleString("default", { month: "long" });
+  const fullYear = date.getFullYear();
+  const month = createDateDiv(fullMonth, "Calendar-month");
+  const year = createDateDiv(fullYear, "Calendar-year");
+  const prevButton = createButton("prev", "<", prevHandler);
+  const nextButton = createButton("next", ">", nextHandler);
+
+  buttonContainer.appendChild(prevButton);
+  buttonContainer.appendChild(nextButton);
+  calendarControls.appendChild(buttonContainer);
+  calendarControls.appendChild(month);
+  calendarControls.appendChild(year);
+  return calendarControls;
+}
+
+function createWeekdays() {
+  const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  return weekdays.map((day) => {
+    const weekday = document.createElement("div");
+    weekday.className = "Calendar-weekday";
+    weekday.innerHTML = day;
+    return weekday;
+  });
+}
+
 function prevHandler(event) {
   event.preventDefault();
   console.log("previous button was clicked!");
@@ -65,38 +94,16 @@ function getDays(month, year) {
 }
 
 export default function calendar() {
-  const calendarControls = document.createElement("div");
-  calendarControls.className = "Calendar-controls";
-
-  const buttonContainer = document.createElement("div");
-  const prevButton = createButton("prev", "<", prevHandler);
-  const nextButton = createButton("next", ">", nextHandler);
   const date = new Date();
-  const fullMonth = date.toLocaleString("default", { month: "long" });
-  const fullYear = date.getFullYear();
-  const month = createDateDiv(fullMonth, "Calendar-month");
-  const year = createDateDiv(fullYear, "Calendar-year");
-
   const calendar = document.createElement("div");
   calendar.className = "Calendar";
 
-  const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-  weekdays.forEach((day) => {
-    const weekday = document.createElement("div");
-    weekday.className = "Calendar-weekday";
-    weekday.innerHTML = day;
-    calendar.appendChild(weekday);
-  });
-
   // console.log(date.getMonth, "date", date.getMonth + 1, "date +1");
   const days = getDays(date.getMonth(), date.getYear());
+  const weekdays = createWeekdays();
+  console.log(days, "days");
+  body.append(createCalendarControls(date));
+  calendar.append(...weekdays);
   calendar.append(...days);
-
-  buttonContainer.appendChild(prevButton);
-  buttonContainer.appendChild(nextButton);
-  calendarControls.appendChild(buttonContainer);
-  calendarControls.appendChild(month);
-  calendarControls.appendChild(year);
-  body.append(calendarControls);
   body.append(calendar);
 }
