@@ -29,6 +29,13 @@ function createButton(direction, symbol, handler) {
   return button;
 }
 
+function createDateDiv(fullDate, dateClass) {
+  const text = document.createElement("div");
+  text.className = dateClass;
+  text.innerHTML = fullDate;
+  return text;
+}
+
 function prevHandler(event) {
   event.preventDefault();
   console.log("previous button was clicked!");
@@ -64,17 +71,11 @@ export default function calendar() {
   const buttonContainer = document.createElement("div");
   const prevButton = createButton("prev", "<", prevHandler);
   const nextButton = createButton("next", ">", nextHandler);
-
-  const month = document.createElement("div");
-  month.className = "Calendar-month";
   const date = new Date();
-  const currentMonth = date.toLocaleString("default", { month: "long" });
-  month.innerHTML = currentMonth;
-
-  const year = document.createElement("div");
-  year.className = "Calendar-year";
-  const currentYear = date.getFullYear();
-  year.innerHTML = currentYear;
+  const fullMonth = date.toLocaleString("default", { month: "long" });
+  const fullYear = date.getFullYear();
+  const month = createDateDiv(fullMonth, "Calendar-month");
+  const year = createDateDiv(fullYear, "Calendar-year");
 
   const calendar = document.createElement("div");
   calendar.className = "Calendar";
