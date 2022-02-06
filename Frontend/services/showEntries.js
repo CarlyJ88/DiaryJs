@@ -1,6 +1,5 @@
-import { getEntries } from './service';
+import { getEntries } from "./service";
 
 export function showEntryHandler() {
   return getEntries();
 }
-

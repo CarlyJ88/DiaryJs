@@ -1,4 +1,4 @@
-import { showEntryHandler } from "../showEntries";
+import { showEntryHandler } from "../services/showEntries";
 
 var showdown = require("showdown"),
   converter = new showdown.Converter({ metadata: true }),

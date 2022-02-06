@@ -1,4 +1,4 @@
-import { addEntry } from "../service";
+import { addEntry } from "../services/service";
 
 const createTitleLabel = () => {
   const labelTitle = document.createElement("label");

@@ -1,3 +1,5 @@
+import { navigateTo } from "../routing";
+
 function numberOfDaysArray(year, month) {
   return Array.from(
     Array(new Date(year, month + 1, 0).getDate()),
@@ -22,10 +24,12 @@ function calculateFirstDayOfTheMonth(dayOfTheWeek) {
 }
 
 function createButton(direction, symbol, handler) {
-  const button = document.createElement("button");
+  const button = document.createElement("a");
+  button.href = "/choose";
+  button.dataset.link = true;
   button.className = `Calendar-${direction}Button`;
   button.innerHTML = symbol;
-  button.addEventListener("click", handler);
+  // button.addEventListener("click", handler);
   return button;
 }
 
@@ -39,17 +43,18 @@ function createDateDiv(fullDate, dateClass) {
 function createCalendarControls(date) {
   const calendarControls = document.createElement("div");
   calendarControls.className = "Calendar-controls";
+
   const buttonContainer = document.createElement("div");
+  const prevButton = createButton("prev", "<", prevHandler);
+  const nextButton = createButton("next", ">", nextHandler);
+  buttonContainer.appendChild(prevButton);
+  buttonContainer.appendChild(nextButton);
+  calendarControls.appendChild(buttonContainer);
+
   const fullMonth = date.toLocaleString("default", { month: "long" });
   const fullYear = date.getFullYear();
   const month = createDateDiv(fullMonth, "Calendar-month");
   const year = createDateDiv(fullYear, "Calendar-year");
-  const prevButton = createButton("prev", "<", prevHandler);
-  const nextButton = createButton("next", ">", nextHandler);
-
-  buttonContainer.appendChild(prevButton);
-  buttonContainer.appendChild(nextButton);
-  calendarControls.appendChild(buttonContainer);
   calendarControls.appendChild(month);
   calendarControls.appendChild(year);
   return calendarControls;
@@ -83,7 +88,7 @@ function getDays(month, year) {
   const firstDay = new Date(year, month, 1);
   const dayOfTheWeek = firstDay.getDay();
   const days = numberOfDaysArray(year, month).map((dayy) => {
-    const day = document.createElement("div");
+    const day = document.createElement("div"); // a?
     day.className = "Calendar-day";
     day.innerHTML = dayy;
     return day;
@@ -93,7 +98,9 @@ function getDays(month, year) {
   return days;
 }
 
-export default function calendar() {
+export default function calendarPage(date1) {
+  console.log(date1, "date");
+
   const date = new Date();
   const calendar = document.createElement("div");
   calendar.className = "Calendar";
