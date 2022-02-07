@@ -131,6 +131,14 @@ body {
   margin-bottom: 25px;
 }
 
+.delete-entry-button {
+  color: black;
+  background: none;
+  position: absolute; 
+  right: 20px;
+  width: 10px;
+}
+
 .diary-item {
   padding: 5px;
   color: black;
