@@ -38,7 +38,7 @@ const createItemEntry = (entry) => {
 const deleteEntryButton = () => {
   const button = document.createElement("button");
   button.className = "delete-entry-button";
-  button.innerHTML = "X";
+  button.innerHTML = "x";
   return button;
 };
 
