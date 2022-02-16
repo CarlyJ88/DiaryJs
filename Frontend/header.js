@@ -1,39 +1,52 @@
 import back from "./arrowback_111142.png";
 import write from "./new.png";
 
-const title = () => {
-  let title = document.createElement("h2");
-  // title.id = 'header-title'
-  title.innerHTML = "Plan";
-  // title.style.fontSize = '24px';
-  return title;
-};
-
 const backButton = () => {
   let backButton = document.createElement("img");
+  const backButtonContainer = document.createElement("a");
+  backButtonContainer.dataset.link = true;
   backButton.src = back;
   backButton.alt = "Back button";
   backButton.width = 40;
   backButton.height = 40;
   // backButton.id = 'header-back-button'
-  return backButton;
+  backButtonContainer.append(backButton);
+
+  backButtonContainer.addEventListener("click", () => {
+    window.history.go(-1);
+  });
+  return backButtonContainer;
 };
 
-const newItemButton = () => {
+const title = (text) => {
+  let title = document.createElement("h2");
+  // title.id = 'header-title'
+  title.innerHTML = text;
+  // title.style.fontSize = '24px';
+  return title;
+};
+
+const newItemButton = (link) => {
   let newItemButton = document.createElement("img");
+  const linkContainer = document.createElement("a");
+  linkContainer.dataset.link = true;
   newItemButton.src = write;
+  linkContainer.href = link;
   newItemButton.alt = "New item";
   newItemButton.width = 40;
   newItemButton.height = 40;
   newItemButton.id = "header-new-item-button";
-  return newItemButton;
+  linkContainer.append(newItemButton);
+  // return newItemButton;
+  return linkContainer;
 };
 
-export default function header() {
+export default function header(firstIcon, text, lastIcon, link) {
   const header = document.createElement("div");
   header.className = "header";
   header.append(backButton());
-  header.append(title());
-  header.append(newItemButton());
-  body.append(header);
+  header.append(title(text));
+  header.append(newItemButton(link));
+  // body.append(header);
+  return header;
 }

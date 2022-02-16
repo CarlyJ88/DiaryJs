@@ -1,4 +1,5 @@
 import { navigateTo } from "../routing";
+import header from "../header";
 
 function numberOfDaysArray(year, month) {
   return Array.from(
@@ -100,7 +101,9 @@ function getDays(month, year) {
 
 export default function calendarPage(date1) {
   console.log(date1, "date");
+  const div = document.createElement("div");
 
+  const headers = header(null, "calendar", null, "/new");
   const date = new Date();
   const calendar = document.createElement("div");
   calendar.className = "Calendar";
@@ -109,8 +112,12 @@ export default function calendarPage(date1) {
   const days = getDays(date.getMonth(), date.getYear());
   const weekdays = createWeekdays();
   console.log(days, "days");
-  body.append(createCalendarControls(date));
+  // body.append(createCalendarControls(date));
   calendar.append(...weekdays);
   calendar.append(...days);
-  body.append(calendar);
+  div.append(headers);
+  div.append(createCalendarControls(date));
+  div.append(calendar);
+  return div;
+  // body.append(calendar);
 }

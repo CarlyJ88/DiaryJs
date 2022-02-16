@@ -125,6 +125,10 @@ body {
   right: 0;
 }
 
+.container {
+  height: 100%;
+}
+
 #date {
   margin-left: 15px;
   margin-top: 35px;
@@ -150,12 +154,10 @@ body {
   flex-direction: column;
   width: 100%;
   height: 150px;
+  height: auto;
 }
 
-
-
 .header {
-  /* background: #D3CBC7; */
   background: rgba(156, 192, 231, 0.2);
   color: rgb(47, 47, 47);
   font-size: 24px;
@@ -163,8 +165,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* width: 100%; */
-  /* gap: 10px; */
+  width: 100%;
 }
 
 #header-new-item-button {
@@ -187,12 +188,16 @@ html {
   white-space: nowrap;
 }
 
+#show-entry {
+  height: 100%;
+}
+
 
 #show-entries {
   list-style-type: none;
   margin: 0;
   padding: 15px;
-  overflow: hidden;
+  /* overflow: hidden; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -212,7 +217,12 @@ html {
   /* margin-block-end: 0vh; */
 }
 
-/* #thisisatitle {
-  margin-block-start: 0vh;
-  margin-block-end: 0vh;
-} */
+.show-item {
+  padding: 5px;
+  color: black;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}

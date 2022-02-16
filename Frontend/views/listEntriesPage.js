@@ -1,9 +1,11 @@
 import { showEntryHandler } from "../services/showEntries";
-// import { deleteEntryHandler } from "../services/deleteEntries";
 import { deleteEntry } from "../services/service";
+import { navigateTo } from "../routing";
+
+import header from "../header";
 
 export default function getEntries() {
-  showEntryHandler().then(listEntries);
+  return showEntryHandler().then(listEntries);
 }
 
 const listDate = () => {
@@ -14,11 +16,11 @@ const listDate = () => {
 
 const createDiaryItem = (entry) => {
   const item = document.createElement("li");
+  item.dataset.link = true;
   let colour = `rgba(${entry.colourCode}, 0.2)`;
   item.className = "diary-item";
   item.style.backgroundColor = colour;
   item.style.border = `rgb(${entry.colourCode}) solid 3px`;
-
   return item;
 };
 
@@ -43,10 +45,11 @@ const deleteEntryButton = () => {
 };
 
 function listEntries(diaryEntries) {
+  const headers = header(null, "list", null, "/new");
+  const div = document.createElement("div");
   const list = document.createElement("ul");
   list.id = "show-entries";
   const date = listDate();
-  body.append(date);
 
   for (let i = 0; i < diaryEntries.length; i++) {
     const fixDate = new Date(diaryEntries[i].date); // Fri Nov 19 2021 19:18:19 GMT+0000 (Greenwich Mean Time)
@@ -56,10 +59,11 @@ function listEntries(diaryEntries) {
     });
     date.innerHTML = month;
     list.append(listEntriesPage(diaryEntries[i]));
-    console.log(diaryEntries[i], "diaryEntries[i]");
   }
-
-  body.append(list);
+  div.append(headers);
+  div.append(date);
+  div.append(list);
+  return div;
 }
 
 function listEntriesPage(entry) {
@@ -70,9 +74,14 @@ function listEntriesPage(entry) {
 
   deleteButton.addEventListener("click", (event) => {
     event.preventDefault();
-    console.log(event, "event");
+    event.stopPropagation();
     deleteEntry(entry.id);
     event.target.parentElement.remove();
+  });
+
+  item.addEventListener("click", (event) => {
+    event.preventDefault();
+    navigateTo(`/show/${entry.id}`);
   });
 
   item.append(deleteButton);

@@ -1,4 +1,5 @@
 import { showEntryHandler } from "../services/showEntries";
+import header from "../header";
 
 const categoryButton = (entry) => {
   const button = document.createElement("button");
@@ -19,25 +20,28 @@ const categoryTitle = () => {
 };
 
 export default function getEntries() {
-  showEntryHandler().then(listCategories);
+  header(null, "choose", null, "/new");
+  return showEntryHandler().then(listCategories);
 }
 
 function listCategories(diaryEntries) {
+  const div = document.createElement("div");
+  const headers = header(null, "choose", null, "/new");
   const list = document.createElement("ul");
-  list.id = "show-entries";
+  list.id = "show-entries"; // change this
   const title = categoryTitle();
-  body.append(title);
 
   for (let i = 0; i < diaryEntries.length; i++) {
     console.log(diaryEntries[i]);
     list.append(chooseCategory(diaryEntries[i]));
   }
-
-  body.append(list);
+  div.append(headers);
+  div.append(title);
+  div.append(list);
+  return div;
 }
 
 function chooseCategory(entry) {
-  console.log("choose category");
   const button = categoryButton(entry);
   return button;
 }

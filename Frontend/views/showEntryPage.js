@@ -1,4 +1,5 @@
 import { showEntryHandler } from "../services/showEntries";
+import header from "../header";
 
 var showdown = require("showdown"),
   converter = new showdown.Converter({ metadata: true }),
@@ -6,15 +7,16 @@ var showdown = require("showdown"),
     "# this is a title \n * bulletpoint 1 \n * bulletpoint 2 \n* bulletpoint 3",
   html = converter.makeHtml(text);
 
-export default function getEntries() {
-  showEntryHandler().then(showEntry);
+export default function showEntryPage(entryId) {
+  return showEntryHandler().then((diaryEntries) =>
+    showEntry(diaryEntries, entryId.id)
+  );
 }
 
 const createDiaryItem = () => {
   const item = document.createElement("li");
-  item.style.height = "auto";
-  item.className = "diary-item";
-
+  // item.style.height = "auto";
+  item.className = "show-item";
   return item;
 };
 
@@ -28,10 +30,7 @@ const createItemTitle = (entry) => {
 const createItemEntry = (entry) => {
   const itemEntry = document.createElement("p");
   itemEntry.className = "show-item-entry";
-
-  console.log(entry.entry);
   html = converter.makeHtml(entry.entry);
-  console.log(html, "html");
   itemEntry.innerHTML = html;
   return itemEntry;
 };
@@ -43,20 +42,25 @@ const createItemLinkToArticle = () => {
   return linkToArticle;
 }; // temporary until markdown module is implemented
 
-function showEntry(diaryEntries) {
-  const list = document.createElement("div");
-  list.id = "show-entries";
+function showEntry(diaryEntries, entryId) {
+  const show = document.createElement("div");
+  show.id = "show-entry";
 
   for (let i = 0; i < diaryEntries.length; i++) {
-    if (diaryEntries[i].id === 56) {
-      list.append(showEntryPage(diaryEntries[i]));
+    if (diaryEntries[i].id === Number(entryId)) {
+      show.append(createEntryPage(diaryEntries[i]));
     }
   }
-
-  body.append(list);
+  return show;
 }
 
-function showEntryPage(entry) {
+function createEntryPage(entry) {
+  console.log(entry.id);
+  const div = document.createElement("div");
+  div.className = "show-entry-page";
+  // div.style.width = "100%";
+  // div.style.background = "red";
+  const headers = header(null, "show", null, `/edit/${entry.id}`);
   const item = createDiaryItem();
   const itemTitle = createItemTitle(entry);
   const itemEntry = createItemEntry(entry);
@@ -65,6 +69,7 @@ function showEntryPage(entry) {
   item.append(itemTitle);
   item.append(itemEntry);
   item.append(linkToArticle);
-
-  return item;
+  div.append(headers);
+  div.append(item);
+  return div;
 }

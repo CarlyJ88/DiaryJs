@@ -27,11 +27,13 @@ export function newEntryButton() {
   const addEntryButton = document.createElement("button");
   addEntryButton.id = "add-form";
   addEntryButton.innerHTML = "New Entry";
-  body.append(addEntryButton);
+  // body.append(addEntryButton);
 
   addEntryButton.addEventListener("click", (event) => {
     event.preventDefault();
     const form = createEntryPopup();
     addEntryHandler(form);
   });
+
+  return addEntryButton;
 }

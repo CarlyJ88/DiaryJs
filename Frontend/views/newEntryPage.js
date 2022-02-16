@@ -1,9 +1,10 @@
 import { addEntry } from "../services/service";
+import header from "../header";
 
 const createTitleLabel = () => {
   const labelTitle = document.createElement("label");
   labelTitle.innerText = "Title";
-  body.appendChild(labelTitle);
+  // body.appendChild(labelTitle);
   return labelTitle;
 };
 
@@ -15,14 +16,14 @@ const createTitle = () => {
   title.style.flexDirection = "column";
   title.style.width = "100%";
   title.style.height = "30px";
-  body.appendChild(title);
+  // body.appendChild(title);
   return title;
 };
 
 const createBlogLabel = () => {
   const labelBlog = document.createElement("label");
   labelBlog.innerText = "Blog";
-  body.appendChild(labelBlog);
+  // body.appendChild(labelBlog);
   return labelBlog;
 };
 
@@ -31,7 +32,7 @@ const createBlog = () => {
   blog.id = "newBlog";
   blog.style.height = "100%";
   blog.style.width = "100%";
-  body.appendChild(blog);
+  // body.appendChild(blog);
   tinymce.init({
     selector: "#newBlog",
     plugins: [
@@ -56,7 +57,7 @@ const createBlog = () => {
 const createArticleLabel = () => {
   const labelArticle = document.createElement("label");
   labelArticle.innerText = "Article";
-  body.appendChild(labelArticle);
+  // body.appendChild(labelArticle);
   return labelArticle;
 };
 
@@ -68,7 +69,7 @@ const createArticle = () => {
   article.style.flexDirection = "column";
   article.style.width = "100%";
   article.style.height = "30px";
-  body.appendChild(article);
+  // body.appendChild(article);
   return article;
 };
 
@@ -77,18 +78,19 @@ const createSubmitButton = () => {
   submit.id = "newEntrySubmit";
   submit.innerText = "Submit";
   // submit.style.justifyContent = 'center';
-  body.appendChild(submit);
+  // body.appendChild(submit);
   return submit;
 };
 
 export default function createEntry(entry) {
-  console.log("createEntry");
-
-  createTitleLabel();
+  const div = document.createElement("div");
+  div.className = "container";
+  const headers = header(null, "new", null, "/new");
+  const titleLabel = createTitleLabel();
   const title = createTitle();
-  createArticleLabel();
+  const articleLabel = createArticleLabel();
   const article = createArticle();
-  createBlogLabel();
+  const blogLabel = createBlogLabel();
   const blog = createBlog();
   const submit = createSubmitButton();
 
@@ -103,11 +105,21 @@ export default function createEntry(entry) {
       })
       .then(() => {
         // tinyMCE.triggerSave();
-        console.log("am II here?");
+        console.log("am I here?");
         // redirect to next page (add link?)
       })
       .catch(function (error) {
         console.log(error);
       });
   });
+  div.append(headers);
+  div.append(titleLabel);
+  div.append(title);
+  div.append(title);
+  div.append(articleLabel);
+  div.append(article);
+  div.append(blogLabel);
+  div.append(blog);
+  div.append(submit);
+  return div;
 }

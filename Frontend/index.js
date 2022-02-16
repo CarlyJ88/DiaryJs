@@ -1,10 +1,6 @@
 import "regenerator-runtime/runtime.js";
 
-import header from "./header";
-
 import { navigateTo, router } from "./routing";
-
-header();
 
 window.addEventListener("popstate", router);
 
