@@ -58,11 +58,6 @@ function createButton(direction, symbol, date) {
       month === 12
         ? `/calendar/${year2}-${months[Number(date2.getMonth())]}`
         : `/calendar/${year}-${months[Number(date2.getMonth())]}`;
-  } else {
-    month = date.getMonth();
-    const year = date.getFullYear();
-    const date2 = new Date(date.getFullYear(), month, 1);
-    button.href = `/calendar/${year}-${months[Number(date2.getMonth())]}`;
   }
   button.dataset.link = true;
   button.className = `Calendar-${direction}Button`; // do I need 2 classes for this?
