@@ -105,7 +105,7 @@ function getDays(month, year) {
     return day;
   });
   days[today - 1].classList.add("is-today");
-  days[0].classList.add(calculateFirstDayOfTheMonth(dayOfTheWeek)); // fix which weekday first day of the month starts
+  days[0].classList.add(calculateFirstDayOfTheMonth(dayOfTheWeek));
   return days;
 }
 
@@ -123,9 +123,9 @@ export default function calendarPage(date1) {
   } else {
     const year = date1.date.slice(0, 4);
     const month = date1.date.slice(5, 7);
-    const dateObject = new Date(`${month} 01, ${year}`);
-    calendarControls = createCalendarControls((dateObject ||= date));
-    days = getDays(dateObject.getMonth(), dateObject.getYear());
+    const dateObject = new Date(year, month, 1);
+    calendarControls = createCalendarControls(dateObject);
+    days = getDays(dateObject.getMonth(), dateObject.getFullYear());
   }
 
   const weekdays = createWeekdays();
