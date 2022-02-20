@@ -40,25 +40,16 @@ function createButton(direction, symbol, date) {
     "11",
     "12",
   ];
-  if (direction === "prev") {
-    const month = Number(date.getMonth()) - 1;
-    const year = Number(date.getFullYear());
-    const year2 = Number(date.getFullYear()) - 1;
-    const date2 = new Date(year, month, 1);
-    button.href =
-      month === -1
-        ? `/calendar/${year2}-${months[Number(date2.getMonth())]}`
-        : `/calendar/${year}-${months[Number(date2.getMonth())]}`;
-  } else if (direction === "next") {
-    const month = Number(date.getMonth()) + 1;
-    const year = Number(date.getFullYear());
-    const year2 = Number(date.getFullYear()) + 1;
-    const date2 = new Date(date.getFullYear(), month, 1);
-    button.href =
-      month === 12
-        ? `/calendar/${year2}-${months[Number(date2.getMonth())]}`
-        : `/calendar/${year}-${months[Number(date2.getMonth())]}`;
-  }
+  const year = Number(date.getFullYear());
+  const month =
+    direction === "prev"
+      ? Number(date.getMonth()) - 1
+      : Number(date.getMonth()) + 1;
+  const date2 = new Date(year, month, 1);
+  button.href = `/calendar/${date2.getFullYear()}-${
+    months[Number(date2.getMonth())]
+  }`;
+
   button.dataset.link = true;
   button.className = `Calendar-${direction}Button`; // do I need 2 classes for this?
   button.innerHTML = symbol;
