@@ -30,11 +30,11 @@ export const router = async () => {
   const routes = [
     //   { path: "/", view: Dashboard },
     { path: "/calendar", view: calendarPage },
+    { path: "/calendar/:date", view: calendarPage },
     { path: "/choose", view: chooseCategory },
     { path: "/list", view: listEntriesPage },
     { path: "/show/:id", view: showEntryPage },
     { path: "/new", view: createEntryPage },
-    { path: "/calendar/:date", view: calendarPage },
     { path: "/edit/:id", view: editEntryPage },
   ];
 
