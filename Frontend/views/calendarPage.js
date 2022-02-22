@@ -25,6 +25,7 @@ function calculateFirstDayOfTheMonth(dayOfTheWeek) {
 }
 
 function createButton(direction, symbol, date) {
+  //
   const button = document.createElement("a");
   const months = [
     "01",
@@ -40,18 +41,15 @@ function createButton(direction, symbol, date) {
     "11",
     "12",
   ];
-  const year = Number(date.getFullYear());
-  const month =
-    direction === "prev"
-      ? Number(date.getMonth()) - 1
-      : Number(date.getMonth()) + 1;
+  const year = date.getFullYear();
+  const m = date.getMonth();
+  const prevMonth = m - 1;
+  const nextMonth = m + 1;
+  const month = direction === "prev" ? prevMonth : nextMonth;
   const date2 = new Date(year, month, 1);
-  button.href = `/calendar/${date2.getFullYear()}-${
-    months[Number(date2.getMonth())]
-  }`;
-
+  button.href = `/calendar/${date2.getFullYear()}-${months[date2.getMonth()]}`;
   button.dataset.link = true;
-  button.className = `Calendar-${direction}Button`; // do I need 2 classes for this?
+  button.className = `Calendar-button`;
   button.innerHTML = symbol;
   return button;
 }
@@ -66,9 +64,9 @@ function createDateDiv(fullDate, dateClass) {
 function createCalendarControls(date) {
   const calendarControls = document.createElement("div");
   calendarControls.className = "Calendar-controls";
-
+  console.log(date, "date in calendar controls");
   const buttonContainer = document.createElement("div");
-  const prevButton = createButton("prev", "<", date);
+  const prevButton = createButton("prev", "<", date); //
   const nextButton = createButton("next", ">", date);
   buttonContainer.appendChild(prevButton);
   buttonContainer.appendChild(nextButton);
@@ -94,6 +92,7 @@ function createWeekdays() {
 }
 
 function getDays(month, year) {
+  //
   const date = new Date();
   const today = date.getDate(); // not needed to next and prev
   const firstDay = new Date(year, month, 1);
@@ -104,26 +103,28 @@ function getDays(month, year) {
     day.innerHTML = dayy;
     return day;
   });
-  days[today - 1].classList.add("is-today");
   days[0].classList.add(calculateFirstDayOfTheMonth(dayOfTheWeek));
+  // if (today) {
+  days[today - 1].classList.add("is-today");
+  // }
   return days;
 }
 
-export default function calendarPage(date1) {
+export default function calendarPage({ date }) {
   const div = document.createElement("div");
   const headers = header(null, "calendar", null, "/new");
   const calendar = document.createElement("div");
   calendar.className = "Calendar";
-  const date = new Date();
   let calendarControls;
   let days;
-  if (Object.keys(date1).length === 0) {
-    calendarControls = createCalendarControls(date);
-    days = getDays(date.getMonth(), date.getYear());
+  if (!date) {
+    const date1 = new Date();
+    calendarControls = createCalendarControls(date1);
+    days = getDays(date1.getMonth(), date1.getFullYear());
   } else {
-    const year = date1.date.slice(0, 4);
-    const month = date1.date.slice(5, 7);
-    const dateObject = new Date(year, month, 1);
+    const year = date.slice(0, 4);
+    const month = date.slice(5, 7);
+    const dateObject = new Date(year, month - 1, 1);
     calendarControls = createCalendarControls(dateObject);
     days = getDays(dateObject.getMonth(), dateObject.getFullYear());
   }

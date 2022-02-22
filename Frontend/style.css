@@ -75,18 +75,9 @@ body {
   background: blue;
 }
 
-.Calendar-nextButton {
+.Calendar-button {
   background-color: #222021;
   color: #d9dddc;
-  grid-column: 2;
-  font-size: 24px; /* change to em */
-  text-decoration: none;
-}
-
-.Calendar-prevButton {
-  background-color: #222021;
-  color: #d9dddc;
-  grid-column: 1;
   font-size: 24px; /* change to em */
   text-decoration: none;
 }
