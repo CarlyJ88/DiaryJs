@@ -64,7 +64,6 @@ function createDateDiv(fullDate, dateClass) {
 function createCalendarControls(date) {
   const calendarControls = document.createElement("div");
   calendarControls.className = "Calendar-controls";
-  console.log(date, "date in calendar controls");
   const buttonContainer = document.createElement("div");
   const prevButton = createButton("prev", "<", date); //
   const nextButton = createButton("next", ">", date);
@@ -110,7 +109,16 @@ function getDays(month, year) {
   return days;
 }
 
+export function createDateObject(date) {
+  const year = date.slice(0, 4);
+  const month = date.slice(5, 7);
+  const dateObject = new Date(year, month - 1, 1);
+  console.log(dateObject, "dateObject");
+  return dateObject;
+}
+
 export default function calendarPage({ date }) {
+  console.log(date, "date");
   const div = document.createElement("div");
   const headers = header(null, "calendar", null, "/new");
   const calendar = document.createElement("div");
@@ -122,9 +130,7 @@ export default function calendarPage({ date }) {
     calendarControls = createCalendarControls(date1);
     days = getDays(date1.getMonth(), date1.getFullYear());
   } else {
-    const year = date.slice(0, 4);
-    const month = date.slice(5, 7);
-    const dateObject = new Date(year, month - 1, 1);
+    const dateObject = createDateObject(date);
     calendarControls = createCalendarControls(dateObject);
     days = getDays(dateObject.getMonth(), dateObject.getFullYear());
   }
