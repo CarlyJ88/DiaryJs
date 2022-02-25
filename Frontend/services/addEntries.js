@@ -3,7 +3,6 @@ import createEntryPopup from "../NOT_USEDcreateEntryPopup";
 import createEntryDisplay from "./createEntryDisplay";
 
 export function addEntryHandler(form) {
-  console.log("am I in add entries");
   form.addEventListener("submit", (event) => {
     const formDatas = new FormData(event.currentTarget);
 

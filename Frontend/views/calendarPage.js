@@ -1,6 +1,5 @@
 // import { navigateTo } from "../routing";
 import header from "../header";
-console.log(document, "document in calendar page");
 
 function numberOfDaysArray(year, month) {
   return Array.from(
@@ -119,7 +118,7 @@ export function createDateObject(date) {
 
 export default function calendarPage({ date }) {
   const div = document.createElement("div");
-  const headers = header(null, "calendar", null, "/new");
+  const headers = header(null, "calendar", null, "/choose");
   const calendar = document.createElement("div");
   calendar.className = "Calendar";
   let calendarControls;

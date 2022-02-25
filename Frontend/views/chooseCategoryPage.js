@@ -1,10 +1,12 @@
 import { showEntryHandler } from "../services/showEntries";
 import header from "../header";
+import { navigateTo } from "../routing";
 
 const categoryButton = (entry) => {
   const button = document.createElement("button");
   button.innerHTML = entry.categoryName;
   button.id = "category-button";
+  button.dataset.link = true;
   let colour = `rgba(${entry.colourCode}, 0.2)`;
   // let colour = `rgba(${entry.colourCode})`;
   button.style.backgroundColor = colour;
@@ -20,7 +22,7 @@ const categoryTitle = () => {
 };
 
 export default function getEntries() {
-  header(null, "choose", null, "/new");
+  header(null, "choose", null, "/new"); // not needed ?
   return showEntryHandler().then(listCategories);
 }
 
@@ -32,7 +34,6 @@ function listCategories(diaryEntries) {
   const title = categoryTitle();
 
   for (let i = 0; i < diaryEntries.length; i++) {
-    console.log(diaryEntries[i]);
     list.append(chooseCategory(diaryEntries[i]));
   }
   div.append(headers);
@@ -43,5 +44,9 @@ function listCategories(diaryEntries) {
 
 function chooseCategory(entry) {
   const button = categoryButton(entry);
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+    navigateTo(`/new/${entry.categoryId}`);
+  });
   return button;
 }

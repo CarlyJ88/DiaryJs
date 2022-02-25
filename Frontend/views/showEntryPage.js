@@ -55,11 +55,8 @@ function showEntry(diaryEntries, entryId) {
 }
 
 function createEntryPage(entry) {
-  console.log(entry.id);
   const div = document.createElement("div");
   div.className = "show-entry-page";
-  // div.style.width = "100%";
-  // div.style.background = "red";
   const headers = header(null, "show", null, `/edit/${entry.id}`);
   const item = createDiaryItem();
   const itemTitle = createItemTitle(entry);

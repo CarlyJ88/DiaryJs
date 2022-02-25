@@ -34,7 +34,7 @@ export const router = async () => {
     { path: "/choose", view: chooseCategory },
     { path: "/list", view: listEntriesPage },
     { path: "/show/:id", view: showEntryPage },
-    { path: "/new", view: createEntryPage },
+    { path: "/new/:categoryId", view: createEntryPage },
     { path: "/edit/:id", view: editEntryPage },
   ];
 

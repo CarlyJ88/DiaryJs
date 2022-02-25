@@ -45,7 +45,7 @@ const deleteEntryButton = () => {
 };
 
 function listEntries(diaryEntries) {
-  const headers = header(null, "list", null, "/new");
+  const headers = header(null, "list", null, "/choose");
   const div = document.createElement("div");
   const list = document.createElement("ul");
   list.id = "show-entries";
