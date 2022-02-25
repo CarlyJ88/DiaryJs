@@ -1,5 +1,6 @@
 // import { navigateTo } from "../routing";
 import header from "../header";
+console.log(document, "document in calendar page");
 
 function numberOfDaysArray(year, month) {
   return Array.from(
@@ -90,22 +91,22 @@ function createWeekdays() {
   });
 }
 
-function getDays(month, year) {
-  //
+export function getDays(month, year) {
   const date = new Date();
-  const today = date.getDate(); // not needed to next and prev
+  const today = date.getDate();
   const firstDay = new Date(year, month, 1);
   const dayOfTheWeek = firstDay.getDay();
   const days = numberOfDaysArray(year, month).map((dayy) => {
     const day = document.createElement("div");
     day.className = "Calendar-day";
+    day.setAttribute("data-testid", "day-div"); // = "day-div";
     day.innerHTML = dayy;
     return day;
   });
   days[0].classList.add(calculateFirstDayOfTheMonth(dayOfTheWeek));
-  // if (today) {
-  days[today - 1].classList.add("is-today");
-  // }
+  if (date.getMonth() === month && date.getFullYear() === year) {
+    days[today - 1].classList.add("is-today");
+  }
   return days;
 }
 
@@ -113,12 +114,10 @@ export function createDateObject(date) {
   const year = date.slice(0, 4);
   const month = date.slice(5, 7);
   const dateObject = new Date(year, month - 1, 1);
-  console.log(dateObject, "dateObject");
   return dateObject;
 }
 
 export default function calendarPage({ date }) {
-  console.log(date, "date");
   const div = document.createElement("div");
   const headers = header(null, "calendar", null, "/new");
   const calendar = document.createElement("div");
