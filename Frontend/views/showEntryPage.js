@@ -35,9 +35,9 @@ const createItemEntry = (entry) => {
   return itemEntry;
 };
 
-const createItemLinkToArticle = () => {
+const createItemLinkToArticle = (entry) => {
   const linkToArticle = document.createElement("a");
-  linkToArticle.href = "https://www.lipsum.com/";
+  linkToArticle.href = entry.link;
   linkToArticle.text = "Link to article";
   return linkToArticle;
 }; // temporary until markdown module is implemented
@@ -64,7 +64,7 @@ function createEntryPage(entry) {
   const item = createDiaryItem();
   const itemTitle = createItemTitle(entry);
   const itemEntry = createItemEntry(entry);
-  const linkToArticle = createItemLinkToArticle();
+  const linkToArticle = createItemLinkToArticle(entry);
 
   item.append(itemTitle);
   item.append(itemEntry);
