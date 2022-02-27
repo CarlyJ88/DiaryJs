@@ -33,3 +33,9 @@ export function editEntry(title, entry, categoryId, link, id) {
     id: id,
   });
 }
+
+export function getCategories() {
+  return axios
+    .get(`http://${base}:4000/list-categories`)
+    .then((res) => res.data);
+}

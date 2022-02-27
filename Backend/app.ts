@@ -1,5 +1,6 @@
 import express from "express";
 import {listEntries, addEntry, deleteEntry, editEntry} from "./diaryService";
+import {listCategories} from "./categoryService";
 import cors from "cors";
 import path from"path";
 
@@ -33,6 +34,10 @@ app.put('/edit-entry', async(req, res) => {
   console.log(entry);
   const passBack = await editEntry(entry)
   res.json(passBack)
+})
+
+app.get('/list-categories', async(req, res) => {
+  res.json(await listCategories())
 })
 
 export default app;
