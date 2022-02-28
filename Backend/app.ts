@@ -1,5 +1,5 @@
 import express from "express";
-import {listEntries, addEntry, deleteEntry, editEntry} from "./diaryService";
+import {listEntries, addEntry, deleteEntry, editEntry, listEntriesForSpeficDate} from "./diaryService";
 import {listCategories} from "./categoryService";
 import cors from "cors";
 import path from"path";
@@ -17,7 +17,6 @@ app.get('/list', async(req, res) =>{
 
 app.post('/add-entry', async(req, res) => {
   const entry = req.body
-  console.log(req.body, 'req.body')
   const passBack = await addEntry(entry)
   res.json(passBack)
 })
@@ -29,15 +28,20 @@ app.delete('/delete-entry', async(req, res) => {
 })
 
 app.put('/edit-entry', async(req, res) => {
-  console.log('did I happen?', req)
   const entry = req.body
-  console.log(entry);
   const passBack = await editEntry(entry)
   res.json(passBack)
 })
 
 app.get('/list-categories', async(req, res) => {
   res.json(await listCategories())
+})
+
+app.get('/list-entries-by-date', async(req, res) => {
+  const dateComingInStart = req.body.dateComingInStart
+  const dateComingInEnd = req.body.dateComingInEnd
+  const passBack = await listEntriesForSpeficDate(dateComingInStart, dateComingInEnd)
+  res.json(passBack)
 })
 
 export default app;
