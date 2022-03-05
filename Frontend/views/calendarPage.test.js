@@ -25,19 +25,20 @@ describe("calendar", () => {
     const currentDay = incomingDate.getDate();
 
     const container = document.createElement("div");
-    container.append(...getDays(incomingMonth, incomingYear));
+    container.append(...getDays(incomingMonth, incomingYear, currentDay));
 
-    expect(getByText(container, currentDay)).toHaveClass("is-today");
+    expect(getByText(container, currentDay)).toHaveClass("selected-today");
   });
   it("'is-today' className is not applied when the month and year are not equal", () => {
     const incomingDate = new Date(2021, 10, 24);
     const incomingMonth = incomingDate.getMonth();
     const incomingYear = incomingDate.getFullYear();
-    const currentDay = new Date().getDate();
+    const currentDay = 24;
+    const selectedDay = 2;
 
     const container = document.createElement("div");
-    container.append(...getDays(incomingMonth, incomingYear));
+    container.append(...getDays(incomingMonth, incomingYear, selectedDay));
 
-    expect(getByText(container, currentDay)).not.toHaveClass("is-today");
+    expect(getByText(container, currentDay)).not.toHaveClass("selected-today");
   });
 });
