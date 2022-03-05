@@ -39,3 +39,14 @@ export function getCategories() {
     .get(`http://${base}:4000/list-categories`)
     .then((res) => res.data);
 }
+
+export function getEntriesByDate(dateStart, dateEnd) {
+  return axios
+    .get(`http://${base}:4000/list-entries-by-date`, {
+      params: {
+        dateComingInStart: dateStart,
+        dateComingInEnd: dateEnd,
+      },
+    })
+    .then((res) => res.data);
+}
