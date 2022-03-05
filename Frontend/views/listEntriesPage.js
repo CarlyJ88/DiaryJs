@@ -1,11 +1,13 @@
-import { showEntryHandler } from "../services/showEntries";
+import { getEntriesByDate } from "../services/service";
 import { deleteEntry } from "../services/service";
 import { navigateTo } from "../routing";
 
 import header from "../header";
 
 export default function getEntries() {
-  return showEntryHandler().then(listEntries);
+  return getEntriesByDate("2022-02-25 12:00:00", "2022-02-25 23:30:00").then(
+    listEntries
+  );
 }
 
 const listDate = () => {
@@ -45,13 +47,16 @@ const deleteEntryButton = () => {
 };
 
 function listEntries(diaryEntries) {
+  console.log(diaryEntries, "entries");
   const headers = header(null, "list", null, "/choose");
   const div = document.createElement("div");
   const list = document.createElement("ul");
   list.id = "show-entries";
   const date = listDate();
 
+  //
   for (let i = 0; i < diaryEntries.length; i++) {
+    console.log(diaryEntries[i], "i");
     const fixDate = new Date(diaryEntries[i].date); // Fri Nov 19 2021 19:18:19 GMT+0000 (Greenwich Mean Time)
     const month = fixDate.toLocaleDateString("en-US", {
       month: "long",
@@ -60,6 +65,8 @@ function listEntries(diaryEntries) {
     date.innerHTML = month;
     list.append(listEntriesPage(diaryEntries[i]));
   }
+  //
+
   div.append(headers);
   div.append(date);
   div.append(list);
