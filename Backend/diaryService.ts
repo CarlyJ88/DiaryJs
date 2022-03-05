@@ -32,7 +32,7 @@ export async function editEntry(entries: EntriesSaved): Promise<EntriesSaved> {
   return { id: entry.rows[0].id, title: entry.rows[0].title, entry: entry.rows[0].entry, categoryId: entry.rows[0].category_id, link: entry.rows[0].link, date: entry.rows[0].date, edited: entry.rows[0].edited };
 }
 
-export async function listEntriesForSpeficDate(dateComingInStart: Date, dateComingInEnd: Date): Promise<EntriesSaved[]> {
+export async function listEntriesForSpeficDate(dateComingInStart: string, dateComingInEnd: string): Promise<EntriesSaved[]> {
   const entries = await executeQuery('SELECT e.*, c.name, c.colour_code FROM entries e INNER JOIN categories c ON e.category_id = c.id WHERE e.date between $1 and $2', [dateComingInStart, dateComingInEnd]);
   return entries.rows.map((row: any) => ({ id: row.id, title: row.title, entry: row.entry, categoryId: row.category_id, date: row.date, edited: row.edited, link: row.link, categoryName: row.name, colourCode: row.colour_code }))
 }
