@@ -50,3 +50,14 @@ export function getEntriesByDate(dateStart, dateEnd) {
     })
     .then((res) => res.data);
 }
+
+export function getCategoriesByDate(dateStart, dateEnd) {
+  return axios
+    .get(`http://${base}:4000/list-categories-by-date`, {
+      params: {
+        dateComingInStart: dateStart,
+        dateComingInEnd: dateEnd,
+      },
+    })
+    .then((res) => res.data);
+}

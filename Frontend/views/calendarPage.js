@@ -1,5 +1,6 @@
 // import { navigateTo } from "../routing";
 import header from "../header";
+import { getCategoriesByDate } from "../services/service";
 
 function numberOfDaysArray(year, month) {
   return Array.from(
@@ -25,7 +26,6 @@ function calculateFirstDayOfTheMonth(dayOfTheWeek) {
 }
 
 function createButton(direction, symbol, date) {
-  //
   const button = document.createElement("a");
   const months = [
     "01",
@@ -90,33 +90,65 @@ function createWeekdays() {
   });
 }
 
-export function getDays(month, year) {
-  const date = new Date();
-  const today = date.getDate();
+export function getDays(month, year, dayyy) {
+  // after selecting prev / next month current date is not selected
+  const months = [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+  ];
   const firstDay = new Date(year, month, 1);
   const dayOfTheWeek = firstDay.getDay();
   const days = numberOfDaysArray(year, month).map((dayy) => {
-    const day = document.createElement("div");
+    const day = document.createElement("a");
+    day.dataset.link = true;
+    day.href = `/calendar/${year}-${months[month]}-${dayy}`; // `/calendar/${date2}}`; `/calendar/${date2.getFullYear()}-${months[date2.getMonth()]}`;
     day.className = "Calendar-day";
     day.setAttribute("data-testid", "day-div"); // = "day-div";
     day.innerHTML = dayy;
     return day;
   });
   days[0].classList.add(calculateFirstDayOfTheMonth(dayOfTheWeek));
-  if (date.getMonth() === month && date.getFullYear() === year) {
-    days[today - 1].classList.add("is-today");
-  }
+  // only want it to add this class if I select the date or default date (today) is shown
+  days[dayyy - 1].classList.add("selected-today");
   return days;
+}
+
+async function getData() {
+  const entries = getCategoriesByDate(
+    "2022-02-25 12:00:00",
+    "2022-02-25 23:30:00"
+  );
+  const response = await entries;
+  return response;
+}
+
+async function getEntries() {
+  const entries = await getData();
+  const entry = entries.map((x) => {
+    return chooseCategory(x);
+  });
+  return entry;
 }
 
 export function createDateObject(date) {
   const year = date.slice(0, 4);
   const month = date.slice(5, 7);
-  const dateObject = new Date(year, month - 1, 1);
+  const day = date.slice(8, 10);
+  const dateObject = new Date(year, month - 1, day || "01");
   return dateObject;
 }
 
-export default function calendarPage({ date }) {
+export default async function calendarPage({ date }) {
   const div = document.createElement("div");
   const headers = header(null, "calendar", null, "/choose");
   const calendar = document.createElement("div");
@@ -126,18 +158,46 @@ export default function calendarPage({ date }) {
   if (!date) {
     const date1 = new Date();
     calendarControls = createCalendarControls(date1);
-    days = getDays(date1.getMonth(), date1.getFullYear());
+    days = getDays(
+      date1.getMonth(),
+      date1.getFullYear(),
+      // date1.getDate().toString(),
+      date1.getDate().toString().padStart(2, "0"),
+      true
+    );
   } else {
     const dateObject = createDateObject(date);
     calendarControls = createCalendarControls(dateObject);
-    days = getDays(dateObject.getMonth(), dateObject.getFullYear());
+    days = getDays(
+      dateObject.getMonth(),
+      dateObject.getFullYear(),
+      // dateObject.getDate(),
+      dateObject.getDate().toString().padStart(2, "0"),
+      false // if no day is supplied
+    );
   }
-
   const weekdays = createWeekdays();
+  const categories = document.createElement("div");
+
+  categories.append(...(await getEntries()));
   calendar.append(...weekdays);
   calendar.append(...days);
   div.append(headers);
   div.append(calendarControls);
   div.append(calendar);
+  div.append(categories);
   return div;
+}
+
+function chooseCategory(category) {
+  const categories = document.createElement("div");
+  categories.className = "category-div";
+  const circle = document.createElement("div");
+  circle.className = "category-circle";
+  circle.style.background = `rgb(${category.colourCode})`;
+  const text = document.createElement("div");
+  text.innerHTML = category.name;
+  categories.append(circle);
+  categories.append(text);
+  return categories;
 }

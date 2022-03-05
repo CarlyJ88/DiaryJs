@@ -40,7 +40,8 @@ body {
 }
 
 .Calendar-day {
-
+  text-decoration: none;
+  color: inherit;
 }
 
 .Calendar-day.is-monday {
@@ -71,7 +72,7 @@ body {
   grid-column-start: 7;
 }
 
-.Calendar-day.is-today {
+.Calendar-day.selected-today {
   background: blue;
 }
 
@@ -105,6 +106,19 @@ body {
   height: 35px;
   /* color: white; */
   color: rgb(47, 47, 47);
+}
+
+.category-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  /* background: red; */
+  margin: 20px;
+}
+
+.category-div {
+  display: flex;
+  align-items: center;
 }
 
 #category-title {
