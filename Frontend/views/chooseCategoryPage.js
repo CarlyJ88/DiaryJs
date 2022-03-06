@@ -44,7 +44,7 @@ function chooseCategory(entry) {
   const button = categoryButton(entry);
   button.addEventListener("click", (event) => {
     event.preventDefault();
-    navigateTo(`/new/${entry.categoryId}`);
+    navigateTo(`/new/${entry.id}`);
   });
   return button;
 }

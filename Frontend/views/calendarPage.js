@@ -114,7 +114,6 @@ export function getDays(date) {
   const days = numberOfDaysArray(year, month).map((dayy) => {
     const day = document.createElement("a");
     day.dataset.link = true;
-    console.log("selected date", `${year}-${months[month]}-${dayy}`);
     day.href = `/calendar/${year}-${months[month]}-${dayy
       .toString()
       .padStart(2, "0")}`;
@@ -129,17 +128,22 @@ export function getDays(date) {
   return days;
 }
 
-async function getData() {
+async function getData(date) {
+  console.log(date, "date");
   const entries = getCategoriesByDate(
-    "2022-02-25 12:00:00",
-    "2022-02-25 23:30:00"
+    `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} 00:00:00`,
+    `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} 23:59:59`
   );
+  console.log(
+    `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} 00:00:00`,
+    "pass in"
+  ); // `2022-02-25 12:00:00`,
   const response = await entries;
   return response;
 }
 
-async function getEntries() {
-  const entries = await getData();
+async function getEntries(date) {
+  const entries = await getData(date);
   const entry = entries.map((x) => {
     return chooseCategory(x);
   });
