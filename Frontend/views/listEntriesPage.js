@@ -4,10 +4,28 @@ import { navigateTo } from "../routing";
 
 import header from "../header";
 
-export default function getEntries() {
-  return getEntriesByDate("2022-02-25 12:00:00", "2022-02-25 23:30:00").then(
-    listEntries
-  );
+function parseDate(date) {
+  if (!date) {
+    return new Date();
+  }
+  const year = date.slice(0, 4);
+  const month = date.slice(5, 7);
+  const day = date.slice(8, 10);
+  return new Date(year, month - 1, day || "01");
+}
+
+export default function getEntries({ date }) {
+  // console.log(date, "date");
+  const dateObject = parseDate(date);
+  console.log(dateObject, "date");
+  return getEntriesByDate(
+    `${dateObject.getFullYear()}-${
+      dateObject.getMonth() + 1
+    }-${dateObject.getDate()} 00:00:00`,
+    `${dateObject.getFullYear()}-${
+      dateObject.getMonth() + 1
+    }-${dateObject.getDate()} 23:59:59`
+  ).then(listEntries);
 }
 
 const listDate = () => {
@@ -47,7 +65,6 @@ const deleteEntryButton = () => {
 };
 
 function listEntries(diaryEntries) {
-  console.log(diaryEntries, "entries");
   const headers = header(null, "list", null, "/choose");
   const div = document.createElement("div");
   const list = document.createElement("ul");
@@ -56,7 +73,6 @@ function listEntries(diaryEntries) {
 
   //
   for (let i = 0; i < diaryEntries.length; i++) {
-    console.log(diaryEntries[i], "i");
     const fixDate = new Date(diaryEntries[i].date); // Fri Nov 19 2021 19:18:19 GMT+0000 (Greenwich Mean Time)
     const month = fixDate.toLocaleDateString("en-US", {
       month: "long",

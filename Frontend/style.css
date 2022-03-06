@@ -17,6 +17,14 @@ body {
   width: 100%;
 }
 
+.button {
+  display: block;
+  border: black solid 1px;
+  padding: 5px;
+  margin-top: 10px;
+  text-align: center;
+}
+
 .Calendar {
   display: grid;
   grid-template-columns: repeat(7, 50px);

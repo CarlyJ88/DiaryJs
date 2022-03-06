@@ -118,7 +118,7 @@ export function getDays(date) {
       .toString()
       .padStart(2, "0")}`;
     day.className = "Calendar-day";
-    day.setAttribute("data-testid", "day-div"); // = "day-div";
+    day.setAttribute("data-testid", "day-div");
     day.innerHTML = dayy;
     return day;
   });
@@ -129,15 +129,10 @@ export function getDays(date) {
 }
 
 async function getData(date) {
-  console.log(date, "date");
   const entries = getCategoriesByDate(
     `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} 00:00:00`,
     `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} 23:59:59`
   );
-  console.log(
-    `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} 00:00:00`,
-    "pass in"
-  ); // `2022-02-25 12:00:00`,
   const response = await entries;
   return response;
 }
@@ -170,6 +165,7 @@ export default async function calendarPage({ date }) {
   const days = getDays(dateObject, false); // false if no day is supplied
   const weekdays = createWeekdays();
   const categories = document.createElement("div");
+  const button = showEntriesButton(dateObject);
 
   categories.append(...(await getEntries(dateObject)));
   calendar.append(...weekdays);
@@ -178,6 +174,7 @@ export default async function calendarPage({ date }) {
   div.append(calendarControls);
   div.append(calendar);
   div.append(categories);
+  div.append(button);
   return div;
 }
 
@@ -192,4 +189,32 @@ function chooseCategory(category) {
   categories.append(circle);
   categories.append(text);
   return categories;
+}
+
+function showEntriesButton(date) {
+  const button = document.createElement("a");
+  button.className = "button";
+  button.innerHTML = "Check out!";
+  button.dataset.link = true;
+  const months = [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+  ];
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const day = date.getDate();
+  button.href = `/list/${year}-${months[month]}-${day
+    .toString()
+    .padStart(2, "0")}`;
+  return button;
 }

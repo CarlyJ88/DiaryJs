@@ -32,7 +32,7 @@ export const router = async () => {
     { path: "/calendar", view: calendarPage },
     { path: "/calendar/:date", view: calendarPage },
     { path: "/choose", view: chooseCategory },
-    { path: "/list", view: listEntriesPage },
+    { path: "/list/:date", view: listEntriesPage },
     { path: "/show/:id", view: showEntryPage },
     { path: "/new/:categoryId", view: createEntryPage },
     { path: "/edit/:id", view: editEntryPage },
