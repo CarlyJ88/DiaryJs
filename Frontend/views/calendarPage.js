@@ -90,7 +90,7 @@ function createWeekdays() {
   });
 }
 
-export function getDays(month, year, dayyy) {
+export function getDays(date) {
   // after selecting prev / next month current date is not selected
   const months = [
     "01",
@@ -106,12 +106,18 @@ export function getDays(month, year, dayyy) {
     "11",
     "12",
   ];
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const dayyy = date.getDate();
   const firstDay = new Date(year, month, 1);
   const dayOfTheWeek = firstDay.getDay();
   const days = numberOfDaysArray(year, month).map((dayy) => {
     const day = document.createElement("a");
     day.dataset.link = true;
-    day.href = `/calendar/${year}-${months[month]}-${dayy}`; // `/calendar/${date2}}`; `/calendar/${date2.getFullYear()}-${months[date2.getMonth()]}`;
+    console.log("selected date", `${year}-${months[month]}-${dayy}`);
+    day.href = `/calendar/${year}-${months[month]}-${dayy
+      .toString()
+      .padStart(2, "0")}`;
     day.className = "Calendar-day";
     day.setAttribute("data-testid", "day-div"); // = "day-div";
     day.innerHTML = dayy;
@@ -140,12 +146,14 @@ async function getEntries() {
   return entry;
 }
 
-export function createDateObject(date) {
+export function parseDate(date) {
+  if (!date) {
+    return new Date();
+  }
   const year = date.slice(0, 4);
   const month = date.slice(5, 7);
   const day = date.slice(8, 10);
-  const dateObject = new Date(year, month - 1, day || "01");
-  return dateObject;
+  return new Date(year, month - 1, day || "01");
 }
 
 export default async function calendarPage({ date }) {
@@ -153,33 +161,13 @@ export default async function calendarPage({ date }) {
   const headers = header(null, "calendar", null, "/choose");
   const calendar = document.createElement("div");
   calendar.className = "Calendar";
-  let calendarControls;
-  let days;
-  if (!date) {
-    const date1 = new Date();
-    calendarControls = createCalendarControls(date1);
-    days = getDays(
-      date1.getMonth(),
-      date1.getFullYear(),
-      // date1.getDate().toString(),
-      date1.getDate().toString().padStart(2, "0"),
-      true
-    );
-  } else {
-    const dateObject = createDateObject(date);
-    calendarControls = createCalendarControls(dateObject);
-    days = getDays(
-      dateObject.getMonth(),
-      dateObject.getFullYear(),
-      // dateObject.getDate(),
-      dateObject.getDate().toString().padStart(2, "0"),
-      false // if no day is supplied
-    );
-  }
+  const dateObject = parseDate(date);
+  const calendarControls = createCalendarControls(dateObject);
+  const days = getDays(dateObject, false); // false if no day is supplied
   const weekdays = createWeekdays();
   const categories = document.createElement("div");
 
-  categories.append(...(await getEntries()));
+  categories.append(...(await getEntries(dateObject)));
   calendar.append(...weekdays);
   calendar.append(...days);
   div.append(headers);
