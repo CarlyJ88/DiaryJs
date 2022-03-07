@@ -1,6 +1,7 @@
 import { showEntryHandler } from "../services/showEntries";
 import { editEntry } from "../services/service";
 import header from "../header";
+import { navigateTo } from "../routing";
 
 export default function editEntryPage(entryId) {
   return showEntryHandler().then((diaryEntries) =>
@@ -97,7 +98,7 @@ const createSubmitButton = () => {
 function editCurrentEntry(diaryEntries, entryId) {
   const div = document.createElement("div");
   div.className = "container";
-  const headers = header(null, "edit", null, "/new");
+  const headers = header(null, "edit", null, "/new"); // figure which route/icon to add out later
   const titleLabel = createTitleLabel();
   const title = createTitle();
   const articleLabel = createArticleLabel();
@@ -108,7 +109,6 @@ function editCurrentEntry(diaryEntries, entryId) {
 
   for (let i = 0; i < diaryEntries.length; i++) {
     if (diaryEntries[i].id === Number(entryId)) {
-      console.log(diaryEntries[i], "diary entries i");
       title.value = diaryEntries[i].title;
       article.value = diaryEntries[i].link;
       blog.value = diaryEntries[i].entry;
@@ -119,6 +119,9 @@ function editCurrentEntry(diaryEntries, entryId) {
     event.preventDefault();
     tinyMCE.triggerSave();
     editEntry(title.value, blog.value, 4, article.value, entryId)
+      .then((response) => {
+        navigateTo(`/show/${response.data.id}`);
+      })
       .then(() => {
         title.value = "";
         article.value = "";
