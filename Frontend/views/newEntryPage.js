@@ -33,20 +33,19 @@ const createBlog = () => {
   tinymce.init({
     selector: "#newBlog",
     plugins: [
-      "advlist emoticons advlist image wordcount link casechange linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker",
+      "advlist emoticons advlist image wordcount link autolink lists media table",
     ],
     toolbar1:
-      "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+      "styleselect | bold italic | alignleft | aligncenter | alignright | alignjustify",
     toolbar2:
-      "image | forecolor backcolor casechange emoticons spellchecker | link | checklist | code | table",
+      "bullist | numlist | outdent | indent | image | forecolor backcolor emoticons spellchecker | link | code | table | image",
     // to-do: "addcomment showcomments export"
+    // not supported: casechange, linkchecker, checklist, mediaembed, pageembed, permanentpen, powerpaste, advtable, tinycomments, tinymcespellchecker
     toolbar_mode: "floating",
     advlist_number_styles: "lower-alpha",
-    toolbar_location: "bottom",
+    toolbar_location: "top",
     skin: "outside",
-    menubar: false,
-    tinycomments_mode: "embedded",
-    tinycomments_author: "Author name",
+    menubar: true,
   });
   return blog;
 };
