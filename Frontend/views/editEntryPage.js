@@ -26,7 +26,6 @@ function handleEntry(title, blog, entryId, article, submit) {
         blog.value = "";
       })
       .then(() => {
-        // tinyMCE.triggerSave();
         console.log("am I here?");
         // redirect to next page (add link?)
       })
@@ -36,29 +35,26 @@ function handleEntry(title, blog, entryId, article, submit) {
   });
 }
 
-async function getData() {
-  const entries = showEntryHandler();
-  const response = await entries;
-  return response;
-}
-
-async function getEntries() {
-  const entries = await getData();
-  return entries;
+async function fetchEntry(entryId) {
+  const diaryEntries = await showEntryHandler();
+  const currentEntry = diaryEntries.find(
+    (entry) => entry.id === Number(entryId.id)
+  );
+  return currentEntry;
 }
 
 async function showEntryData(entryId, title, article, blog) {
-  const diaryEntries = getEntries();
-  for (let i = 0; i < diaryEntries.length; i++) {
-    if (diaryEntries[i].id === Number(entryId)) {
-      title.value = diaryEntries[i].title;
-      article.value = diaryEntries[i].link;
-      blog.value = diaryEntries[i].entry;
-    }
+  const currentEntry = await fetchEntry(entryId);
+  if (!currentEntry) {
+    navigateTo("/calendar");
+    return;
   }
+  title.value = currentEntry.title;
+  article.value = currentEntry.link;
+  blog.value = currentEntry.entry;
 }
 
-export default function editEntryPage(entryId) {
+export default async function editEntryPage(entryId) {
   const div = document.createElement("div");
   div.className = "container";
   const headers = header(null, "edit", "save", "/new"); // figure which route/icon to add out later
@@ -69,7 +65,7 @@ export default function editEntryPage(entryId) {
   const blogLabel = createBlogLabel();
   const blog = createBlog();
   const submit = createSubmitButton();
-  showEntryData(entryId, title, article, blog);
+  await showEntryData(entryId, title, article, blog);
 
   // save.submit.addEventListener...
   handleEntry(title, blog, entryId, article, submit);
