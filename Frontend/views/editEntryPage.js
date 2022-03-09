@@ -12,12 +12,6 @@ import {
   createSubmitButton,
 } from "../elements";
 
-export default function editEntryPage(entryId) {
-  return showEntryHandler().then((diaryEntries) =>
-    editCurrentEntry(diaryEntries, entryId.id)
-  );
-}
-
 function handleEntry(title, blog, entryId, article, submit) {
   submit.addEventListener("click", (event) => {
     event.preventDefault();
@@ -42,7 +36,19 @@ function handleEntry(title, blog, entryId, article, submit) {
   });
 }
 
-function showEntryData(diaryEntries, entryId, title, article, blog) {
+async function getData() {
+  const entries = showEntryHandler();
+  const response = await entries;
+  return response;
+}
+
+async function getEntries() {
+  const entries = await getData();
+  return entries;
+}
+
+async function showEntryData(entryId, title, article, blog) {
+  const diaryEntries = getEntries();
   for (let i = 0; i < diaryEntries.length; i++) {
     if (diaryEntries[i].id === Number(entryId)) {
       title.value = diaryEntries[i].title;
@@ -52,7 +58,7 @@ function showEntryData(diaryEntries, entryId, title, article, blog) {
   }
 }
 
-function editCurrentEntry(diaryEntries, entryId) {
+export default function editEntryPage(entryId) {
   const div = document.createElement("div");
   div.className = "container";
   const headers = header(null, "edit", "save", "/new"); // figure which route/icon to add out later
@@ -63,7 +69,7 @@ function editCurrentEntry(diaryEntries, entryId) {
   const blogLabel = createBlogLabel();
   const blog = createBlog();
   const submit = createSubmitButton();
-  showEntryData(diaryEntries, entryId, title, article, blog);
+  showEntryData(entryId, title, article, blog);
 
   // save.submit.addEventListener...
   handleEntry(title, blog, entryId, article, submit);
