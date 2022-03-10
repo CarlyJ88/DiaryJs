@@ -27,27 +27,13 @@ function calculateFirstDayOfTheMonth(dayOfTheWeek) {
 
 function createButton(direction, symbol, date) {
   const button = document.createElement("a");
-  const months = [
-    "01",
-    "02",
-    "03",
-    "04",
-    "05",
-    "06",
-    "07",
-    "08",
-    "09",
-    "10",
-    "11",
-    "12",
-  ];
   const year = date.getFullYear();
   const m = date.getMonth();
   const prevMonth = m - 1;
   const nextMonth = m + 1;
   const month = direction === "prev" ? prevMonth : nextMonth;
   const date2 = new Date(year, month, 1);
-  button.href = `/calendar/${date2.getFullYear()}-${months[date2.getMonth()]}`;
+  button.href = `/calendar/${date2.getFullYear()}-${formatMonth(month)}`;
   button.dataset.link = true;
   button.className = `Calendar-button`;
   button.innerHTML = symbol;
@@ -90,22 +76,16 @@ function createWeekdays() {
   });
 }
 
+function formatMonth(month) {
+  return (month + 1).toString().padStart(2, "0");
+}
+
+function formatDay(dayy) {
+  return dayy.toString().padStart(2, "0");
+}
+
 export function getDays(date) {
   // after selecting prev / next month current date is not selected
-  const months = [
-    "01",
-    "02",
-    "03",
-    "04",
-    "05",
-    "06",
-    "07",
-    "08",
-    "09",
-    "10",
-    "11",
-    "12",
-  ];
   const year = date.getFullYear();
   const month = date.getMonth();
   const dayyy = date.getDate();
@@ -114,9 +94,7 @@ export function getDays(date) {
   const days = numberOfDaysArray(year, month).map((dayy) => {
     const day = document.createElement("a");
     day.dataset.link = true;
-    day.href = `/calendar/${year}-${months[month]}-${dayy
-      .toString()
-      .padStart(2, "0")}`;
+    day.href = `/calendar/${year}-${formatMonth(month)}-${formatDay(dayy)}`;
     day.className = "Calendar-day";
     day.setAttribute("data-testid", "day-div");
     day.innerHTML = dayy;
@@ -207,25 +185,9 @@ function showEntriesButton(date) {
   button.className = "button";
   button.innerHTML = "Check out!";
   button.dataset.link = true;
-  const months = [
-    "01",
-    "02",
-    "03",
-    "04",
-    "05",
-    "06",
-    "07",
-    "08",
-    "09",
-    "10",
-    "11",
-    "12",
-  ];
   const year = date.getFullYear();
   const month = date.getMonth();
   const day = date.getDate();
-  button.href = `/list/${year}-${months[month]}-${day
-    .toString()
-    .padStart(2, "0")}`;
+  button.href = `/list/${year}-${formatMonth(month)}-${formatDay(day)}`;
   return button;
 }
