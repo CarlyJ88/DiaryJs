@@ -155,6 +155,22 @@ export function parseDate(date) {
   return new Date(year, month - 1, day || "01");
 }
 
+async function displayCategories(dateObject) {
+  const entries = await getEntries(dateObject);
+  const hasEntries = entries.length;
+  if (hasEntries) {
+    const categories = document.createElement("div");
+    const button = showEntriesButton(dateObject);
+    categories.append(...entries);
+    return [categories, button];
+  } else {
+    const text = document.createElement("div");
+    text.innerHTML = "No entry found.";
+    text.style.margin = "20px";
+    return [text];
+  }
+}
+
 export default async function calendarPage({ date }) {
   const div = document.createElement("div");
   const headers = header(null, "calendar", null, "/choose");
@@ -164,28 +180,12 @@ export default async function calendarPage({ date }) {
   const calendarControls = createCalendarControls(dateObject);
   const days = getDays(dateObject, false); // false if no day is supplied
   const weekdays = createWeekdays();
-  const categories = document.createElement("div");
-  const button = showEntriesButton(dateObject);
-
-  const hasEntries = { ...(await getEntries(dateObject)) }[0];
-
-  categories.append(...(await getEntries(dateObject)));
   calendar.append(...weekdays);
   calendar.append(...days);
   div.append(headers);
   div.append(calendarControls);
   div.append(calendar);
-  console.log(hasEntries, "has entries");
-  if (hasEntries) {
-    console.log("I am empty");
-    div.append(categories);
-    div.append(button);
-  } else {
-    const text = document.createElement("div");
-    text.innerHTML = "No entry found.";
-    text.style.margin = "20px";
-    div.append(text);
-  }
+  div.append(...(await displayCategories(dateObject)));
   return div;
 }
 
