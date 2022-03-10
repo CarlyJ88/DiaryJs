@@ -9,11 +9,9 @@ export function addEntryHandler(form) {
     event.preventDefault();
     addEntry(formDatas.get("title"), formDatas.get("textArea"))
       .then(function (response) {
-        console.log("am I in then???");
         createEntryDisplay(response.data);
       })
       .then(() => {
-        console.log("am II here?");
         form.parentElement.parentElement.remove();
       })
       .catch(function (error) {

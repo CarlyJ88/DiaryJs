@@ -47,7 +47,6 @@ app.get('/list-entries-by-date', async(req, res) => {
 app.get('/list-categories-by-date', async(req, res) => {
   const dateComingInStart = req.query.dateComingInStart as string
   const dateComingInEnd = req.query.dateComingInEnd as string
-  console.log(dateComingInStart, 'start', dateComingInEnd, 'end')
   const passBack = await listCategoriesForSpeficDate(dateComingInStart, dateComingInEnd)
   res.json(passBack)
 })

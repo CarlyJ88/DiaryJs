@@ -20,15 +20,6 @@ function handleEntry(title, blog, entryId, article, submit) {
       .then((response) => {
         navigateTo(`/show/${response.data.id}`);
       })
-      .then(() => {
-        title.value = "";
-        article.value = "";
-        blog.value = "";
-      })
-      .then(() => {
-        console.log("am I here?");
-        // redirect to next page (add link?)
-      })
       .catch(function (error) {
         console.log(error);
       });

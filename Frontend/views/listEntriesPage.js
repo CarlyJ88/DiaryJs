@@ -15,9 +15,7 @@ function parseDate(date) {
 }
 
 export default function getEntries({ date }) {
-  // console.log(date, "date");
   const dateObject = parseDate(date);
-  console.log(dateObject, "date");
   return getEntriesByDate(
     `${dateObject.getFullYear()}-${
       dateObject.getMonth() + 1
@@ -98,7 +96,9 @@ function listEntriesPage(entry) {
   deleteButton.addEventListener("click", (event) => {
     event.preventDefault();
     event.stopPropagation();
-    deleteEntry(entry.id);
+    deleteEntry(entry.id).catch(function (error) {
+      console.log(error);
+    });
     event.target.parentElement.remove();
   });
 
