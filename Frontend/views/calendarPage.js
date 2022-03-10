@@ -140,7 +140,7 @@ async function getData(date) {
 async function getEntries(date) {
   const entries = await getData(date);
   const entry = entries.map((x) => {
-    return chooseCategory(x);
+    return showCategories(x);
   });
   return entry;
 }
@@ -167,18 +167,29 @@ export default async function calendarPage({ date }) {
   const categories = document.createElement("div");
   const button = showEntriesButton(dateObject);
 
+  const hasEntries = { ...(await getEntries(dateObject)) }[0];
+
   categories.append(...(await getEntries(dateObject)));
   calendar.append(...weekdays);
   calendar.append(...days);
   div.append(headers);
   div.append(calendarControls);
   div.append(calendar);
-  div.append(categories);
-  div.append(button);
+  console.log(hasEntries, "has entries");
+  if (hasEntries) {
+    console.log("I am empty");
+    div.append(categories);
+    div.append(button);
+  } else {
+    const text = document.createElement("div");
+    text.innerHTML = "No entry found.";
+    text.style.margin = "20px";
+    div.append(text);
+  }
   return div;
 }
 
-function chooseCategory(category) {
+function showCategories(category) {
   const categories = document.createElement("div");
   categories.className = "category-div";
   const circle = document.createElement("div");
