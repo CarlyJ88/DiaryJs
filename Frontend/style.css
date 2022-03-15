@@ -23,6 +23,13 @@ body {
   padding: 5px;
   margin-top: 10px;
   text-align: center;
+  text-decoration: none;
+  color: inherit;
+  font-size: 24px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px; /*why won't this do anything?*/
+  background: inherit;
 }
 
 .Calendar {
