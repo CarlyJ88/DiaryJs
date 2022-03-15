@@ -16,7 +16,7 @@ function handleEntry(title, blog, entryId, article, submit) {
   submit.addEventListener("click", (event) => {
     event.preventDefault();
     tinyMCE.triggerSave();
-    editEntry(title.value, blog.value, 4, article.value, entryId)
+    editEntry(title.value, blog.value, 4, article.value, entryId.id)
       .then((response) => {
         navigateTo(`/show/${response.data.id}`);
       })
@@ -46,6 +46,7 @@ async function showEntryData(entryId, title, article, blog) {
 }
 
 export default async function editEntryPage(entryId) {
+  console.log(entryId, "entry id");
   const div = document.createElement("div");
   div.className = "container";
   const headers = header(null, "edit", "save", "/new"); // figure which route/icon to add out later
@@ -57,10 +58,7 @@ export default async function editEntryPage(entryId) {
   const blog = createBlog();
   const submit = createSubmitButton();
   await showEntryData(entryId, title, article, blog);
-
-  // save.submit.addEventListener...
   handleEntry(title, blog, entryId, article, submit);
-
   div.append(headers);
   div.append(titleLabel);
   div.append(title);

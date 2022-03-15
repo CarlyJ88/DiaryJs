@@ -4,14 +4,14 @@ export function createBlog() {
   blog.style.height = "100%";
   blog.style.width = "100%";
   tinymce.init({
-    selector: ".myBlog",
+    target: blog,
     plugins: [
-      "advlist emoticons advlist image wordcount link autolink lists media table",
+      "advlist emoticons advlist image wordcount link autolink lists media table codesample",
     ],
     toolbar1:
       "styleselect | bold italic | alignleft | aligncenter | alignright | alignjustify",
     toolbar2:
-      "bullist | numlist | outdent | indent | image | forecolor backcolor emoticons spellchecker | link | code | table | image",
+      "bullist | numlist | outdent | indent | image | forecolor backcolor emoticons spellchecker | link | code | table | image | codesample",
     // to-do: "addcomment showcomments export"
     // not supported: casechange, linkchecker, checklist, mediaembed, pageembed, permanentpen, powerpaste, advtable, tinycomments, tinymcespellchecker
     toolbar_mode: "floating",
