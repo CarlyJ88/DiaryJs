@@ -19,11 +19,6 @@ function handleEntry(title, blog, categoryId, article, submit) {
       .then((response) => {
         navigateTo(`/show/${response.data.id}`);
       })
-      .then(() => {
-        title.value = "";
-        article.value = "";
-        blog.value = "";
-      })
       .catch(function (error) {
         console.log(error);
       });
