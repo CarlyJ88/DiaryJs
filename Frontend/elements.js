@@ -63,7 +63,7 @@ export const createArticle = () => {
 };
 
 export const createSubmitButton = () => {
-  const submit = document.createElement("button");
+  const submit = document.createElement("a");
   submit.className = "button";
   submit.innerText = "Submit";
   return submit;
