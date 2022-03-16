@@ -1,4 +1,3 @@
-// import { navigateTo } from "../routing";
 import header from "../header";
 import { getCategoriesByDate } from "../services/service";
 
@@ -84,8 +83,7 @@ function formatDay(dayy) {
   return dayy.toString().padStart(2, "0");
 }
 
-export function getDays(date) {
-  // after selecting prev / next month current date is not selected
+export function getDays(date, selectDay) {
   const year = date.getFullYear();
   const month = date.getMonth();
   const dayyy = date.getDate();
@@ -101,8 +99,16 @@ export function getDays(date) {
     return day;
   });
   days[0].classList.add(calculateFirstDayOfTheMonth(dayOfTheWeek));
-  // only want it to add this class if I select the date or default date (today) is shown
-  days[dayyy - 1].classList.add("selected-today");
+  const today = new Date();
+  if (
+    (today.getFullYear() === date.getFullYear() &&
+      today.getMonth() === date.getMonth() &&
+      today.getDate() === date.getDate()) ||
+    selectDay.length === 10
+  ) {
+    days[dayyy - 1].classList.add("selected-today");
+  }
+
   return days;
 }
 
@@ -130,7 +136,8 @@ export function parseDate(date) {
   const year = date.slice(0, 4);
   const month = date.slice(5, 7);
   const day = date.slice(8, 10);
-  return new Date(year, month - 1, day || "01");
+  const today = new Date();
+  return new Date(year, month - 1, day || today.getDate());
 }
 
 async function displayCategories(dateObject) {
@@ -156,7 +163,7 @@ export default async function calendarPage({ date }) {
   calendar.className = "Calendar";
   const dateObject = parseDate(date);
   const calendarControls = createCalendarControls(dateObject);
-  const days = getDays(dateObject, false); // false if no day is supplied
+  const days = getDays(dateObject, date);
   const weekdays = createWeekdays();
   calendar.append(...weekdays);
   calendar.append(...days);
