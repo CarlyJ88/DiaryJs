@@ -83,7 +83,19 @@ function formatDay(dayy) {
   return dayy.toString().padStart(2, "0");
 }
 
-export function getDays(date, selectDay) {
+function selectedDay(date, dayyy, days) {
+  const today = new Date();
+  if (
+    (today.getFullYear() === date.getFullYear() &&
+      today.getMonth() === date.getMonth() &&
+      today.getDate() === date.getDate()) ||
+    selectDay.length === 10
+  ) {
+    return days[dayyy - 1].classList.add("selected-today");
+  }
+}
+
+export function getDays(date) {
   const year = date.getFullYear();
   const month = date.getMonth();
   const dayyy = date.getDate();
@@ -99,16 +111,7 @@ export function getDays(date, selectDay) {
     return day;
   });
   days[0].classList.add(calculateFirstDayOfTheMonth(dayOfTheWeek));
-  const today = new Date();
-  if (
-    (today.getFullYear() === date.getFullYear() &&
-      today.getMonth() === date.getMonth() &&
-      today.getDate() === date.getDate()) ||
-    selectDay.length === 10
-  ) {
-    days[dayyy - 1].classList.add("selected-today");
-  }
-
+  selectedDay(date, dayyy, days);
   return days;
 }
 
@@ -163,7 +166,7 @@ export default async function calendarPage({ date }) {
   calendar.className = "Calendar";
   const dateObject = parseDate(date);
   const calendarControls = createCalendarControls(dateObject);
-  const days = getDays(dateObject, date);
+  const days = getDays(dateObject);
   const weekdays = createWeekdays();
   calendar.append(...weekdays);
   calendar.append(...days);
