@@ -83,7 +83,7 @@ function formatDay(dayy) {
   return dayy.toString().padStart(2, "0");
 }
 
-function selectedDay(date, dayyy, days) {
+function selectedDay(date, dayyy, days, selectDay) {
   const today = new Date();
   if (
     (today.getFullYear() === date.getFullYear() &&
@@ -95,7 +95,7 @@ function selectedDay(date, dayyy, days) {
   }
 }
 
-export function getDays(date) {
+export function getDays(date, selectDay) {
   const year = date.getFullYear();
   const month = date.getMonth();
   const dayyy = date.getDate();
@@ -111,7 +111,7 @@ export function getDays(date) {
     return day;
   });
   days[0].classList.add(calculateFirstDayOfTheMonth(dayOfTheWeek));
-  selectedDay(date, dayyy, days);
+  selectedDay(date, dayyy, days, selectDay);
   return days;
 }
 
@@ -166,7 +166,7 @@ export default async function calendarPage({ date }) {
   calendar.className = "Calendar";
   const dateObject = parseDate(date);
   const calendarControls = createCalendarControls(dateObject);
-  const days = getDays(dateObject);
+  const days = getDays(dateObject, date);
   const weekdays = createWeekdays();
   calendar.append(...weekdays);
   calendar.append(...days);
