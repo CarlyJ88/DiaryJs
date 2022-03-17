@@ -1,4 +1,5 @@
 import header from "../header";
+import write from "../new.png";
 import { getCategoriesByDate } from "../services/service";
 
 function numberOfDaysArray(year, month) {
@@ -161,7 +162,7 @@ async function displayCategories(dateObject) {
 
 export default async function calendarPage({ date }) {
   const div = document.createElement("div");
-  const headers = header(null, "calendar", null, "/choose");
+  const headers = header("calendar", write, "/choose", "New item");
   const calendar = document.createElement("div");
   calendar.className = "Calendar";
   const dateObject = parseDate(date);

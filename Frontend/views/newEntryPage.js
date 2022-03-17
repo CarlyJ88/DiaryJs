@@ -1,5 +1,6 @@
 import { addEntry } from "../services/service";
 import header from "../header";
+import save from "../save.png";
 import { navigateTo } from "../routing";
 import {
   createBlog,
@@ -8,11 +9,10 @@ import {
   createArticleLabel,
   createArticle,
   createBlogLabel,
-  createSubmitButton,
 } from "../elements";
 
-function handleEntry(title, blog, categoryId, article, submit) {
-  submit.addEventListener("click", (event) => {
+function handleEntry(title, blog, categoryId, article) {
+  return (event) => {
     event.preventDefault();
     tinyMCE.triggerSave();
     addEntry(title.value, blog.value, categoryId.categoryId, article.value)
@@ -22,23 +22,25 @@ function handleEntry(title, blog, categoryId, article, submit) {
       .catch(function (error) {
         console.log(error);
       });
-  });
+  };
 }
 
 export default function createEntry(categoryId) {
   const div = document.createElement("div");
   div.className = "container";
-  const headers = header(null, "new", null, "/new"); // new entry icon not needed?
   const titleLabel = createTitleLabel();
   const title = createTitle();
   const articleLabel = createArticleLabel();
   const article = createArticle();
   const blogLabel = createBlogLabel();
   const blog = createBlog();
-  const submit = createSubmitButton();
-
-  handleEntry(title, blog, categoryId, article, submit);
-
+  const headers = header(
+    "new",
+    save,
+    null,
+    "Save item",
+    handleEntry(title, blog, categoryId, article)
+  );
   div.append(headers);
   div.append(titleLabel);
   div.append(title);
@@ -47,6 +49,5 @@ export default function createEntry(categoryId) {
   div.append(article);
   div.append(blogLabel);
   div.append(blog);
-  div.append(submit);
   return div;
 }

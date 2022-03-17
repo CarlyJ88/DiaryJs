@@ -1,5 +1,6 @@
 import back from "./arrowback_111142.png";
-import write from "./new.png";
+// import write from "./new.png";
+// import save from "./save.png";
 
 const backButton = () => {
   let backButton = document.createElement("img");
@@ -26,27 +27,28 @@ const title = (text) => {
   return title;
 };
 
-const newItemButton = (link) => {
+const newItemButton = (link, icon, alt, callback) => {
+  console.log(icon, "icon");
   let newItemButton = document.createElement("img");
   const linkContainer = document.createElement("a");
   linkContainer.dataset.link = true;
-  newItemButton.src = write;
+  newItemButton.src = icon;
   linkContainer.href = link;
-  newItemButton.alt = "New item";
+  newItemButton.alt = alt;
   newItemButton.width = 40;
   newItemButton.height = 40;
   newItemButton.id = "header-new-item-button";
   linkContainer.append(newItemButton);
-  // return newItemButton;
+  linkContainer.addEventListener("click", callback);
   return linkContainer;
 };
 
-export default function header(firstIcon, text, lastIcon, link) {
+export default function header(text, icon, link, alt, callback) {
   const header = document.createElement("div");
   header.className = "header";
   header.append(backButton());
   header.append(title(text));
-  header.append(newItemButton(link));
+  header.append(newItemButton(link, icon, alt, callback));
   // body.append(header);
   return header;
 }

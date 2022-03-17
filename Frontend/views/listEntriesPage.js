@@ -3,6 +3,7 @@ import { deleteEntry } from "../services/service";
 import { navigateTo } from "../routing";
 
 import header from "../header";
+import write from "../new.png";
 
 function parseDate(date) {
   if (!date) {
@@ -63,7 +64,7 @@ const deleteEntryButton = () => {
 };
 
 function listEntries(diaryEntries) {
-  const headers = header(null, "list", null, "/choose");
+  const headers = header("list", write, "/choose", "New item");
   const div = document.createElement("div");
   const list = document.createElement("ul");
   list.id = "show-entries";

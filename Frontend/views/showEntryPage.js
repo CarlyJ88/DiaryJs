@@ -1,5 +1,6 @@
 import { showEntryHandler } from "../services/showEntries";
 import header from "../header";
+import write from "../new.png";
 
 var showdown = require("showdown"),
   converter = new showdown.Converter({ metadata: true }),
@@ -57,7 +58,7 @@ function showEntry(diaryEntries, entryId) {
 function createEntryPage(entry) {
   const div = document.createElement("div");
   div.className = "show-entry-page";
-  const headers = header(null, "show", null, `/edit/${entry.id}`);
+  const headers = header("show", write, `/edit/${entry.id}`, "Edit item");
   const item = createDiaryItem();
   const itemTitle = createItemTitle(entry);
   const itemEntry = createItemEntry(entry);

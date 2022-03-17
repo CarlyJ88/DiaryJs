@@ -1,6 +1,7 @@
 import { showEntryHandler } from "../services/showEntries";
 import { editEntry } from "../services/service";
 import header from "../header";
+import save from "../save.png";
 import { navigateTo } from "../routing";
 import {
   createBlog,
@@ -9,11 +10,10 @@ import {
   createArticleLabel,
   createArticle,
   createBlogLabel,
-  createSubmitButton,
 } from "../elements";
 
-function handleEntry(title, blog, entryId, article, submit) {
-  submit.addEventListener("click", (event) => {
+function handleEntry(title, blog, entryId, article) {
+  return (event) => {
     event.preventDefault();
     tinyMCE.triggerSave();
     editEntry(title.value, blog.value, 4, article.value, entryId.id)
@@ -23,7 +23,7 @@ function handleEntry(title, blog, entryId, article, submit) {
       .catch(function (error) {
         console.log(error);
       });
-  });
+  };
 }
 
 async function fetchEntry(entryId) {
@@ -46,19 +46,23 @@ async function showEntryData(entryId, title, article, blog) {
 }
 
 export default async function editEntryPage(entryId) {
-  console.log(entryId, "entry id");
   const div = document.createElement("div");
   div.className = "container";
-  const headers = header(null, "edit", "save", "/new"); // figure which route/icon to add out later
+
   const titleLabel = createTitleLabel();
   const title = createTitle();
   const articleLabel = createArticleLabel();
   const article = createArticle();
   const blogLabel = createBlogLabel();
   const blog = createBlog();
-  const submit = createSubmitButton();
   await showEntryData(entryId, title, article, blog);
-  handleEntry(title, blog, entryId, article, submit);
+  const headers = header(
+    "edit",
+    save,
+    null,
+    "Save item",
+    handleEntry(title, blog, entryId, article)
+  );
   div.append(headers);
   div.append(titleLabel);
   div.append(title);
@@ -67,6 +71,5 @@ export default async function editEntryPage(entryId) {
   div.append(article);
   div.append(blogLabel);
   div.append(blog);
-  div.append(submit);
   return div;
 }

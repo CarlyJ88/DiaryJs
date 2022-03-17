@@ -1,5 +1,6 @@
 import { getCategories } from "../services/service";
 import header from "../header";
+import write from "../new.png";
 import { navigateTo } from "../routing";
 
 const categoryButton = (entry) => {
@@ -27,7 +28,7 @@ export default function getEntries() {
 
 function listCategories(diaryEntries) {
   const div = document.createElement("div");
-  const headers = header(null, "choose", null, "/new");
+  const headers = header("choose", write, "/new", "New item"); // pass no image and no link?
   const list = document.createElement("ul");
   list.id = "show-entries"; // change this
   const title = categoryTitle();
