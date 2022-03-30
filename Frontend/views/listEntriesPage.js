@@ -15,21 +15,37 @@ function parseDate(date) {
   return new Date(year, month - 1, day || "01");
 }
 
-export default function getEntries({ date }) {
-  const dateObject = parseDate(date);
-  return getEntriesByDate(
+async function getData(dateObject, user) {
+  const uid = user.uid;
+  const entries = getEntriesByDate(
     `${dateObject.getFullYear()}-${
       dateObject.getMonth() + 1
     }-${dateObject.getDate()} 00:00:00`,
     `${dateObject.getFullYear()}-${
       dateObject.getMonth() + 1
-    }-${dateObject.getDate()} 23:59:59`
-  ).then(listEntries);
+    }-${dateObject.getDate()} 23:59:59`,
+    uid
+  );
+  const response = await entries;
+  return response;
 }
 
-const listDate = () => {
+async function getEntries(date, user) {
+  const entries = await getData(date, user);
+  const entry = entries.map((x) => {
+    return listEntries(x, date);
+  });
+  return entry;
+}
+
+const listDate = (date1) => {
   const date = document.createElement("h1");
   date.id = "date";
+  const month = date1.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+  });
+  date.innerHTML = month;
   return date;
 };
 
@@ -63,32 +79,30 @@ const deleteEntryButton = () => {
   return button;
 };
 
-function listEntries(diaryEntries) {
+function formatMonth(month) {
+  return (month + 1).toString().padStart(2, "0");
+}
+
+function formatDay(dayy) {
+  return dayy.toString().padStart(2, "0");
+}
+
+export default async function listEntriesPage({ date }, user) {
+  const dateObject = parseDate(date);
+  const entries = await getEntries(dateObject, user);
   const headers = header("list", write, "/choose", "New item");
   const div = document.createElement("div");
   const list = document.createElement("ul");
   list.id = "show-entries";
-  const date = listDate();
-
-  //
-  for (let i = 0; i < diaryEntries.length; i++) {
-    const fixDate = new Date(diaryEntries[i].date); // Fri Nov 19 2021 19:18:19 GMT+0000 (Greenwich Mean Time)
-    const month = fixDate.toLocaleDateString("en-US", {
-      month: "long",
-      day: "numeric",
-    });
-    date.innerHTML = month;
-    list.append(listEntriesPage(diaryEntries[i]));
-  }
-  //
-
+  const date1 = listDate(dateObject);
   div.append(headers);
-  div.append(date);
+  div.append(date1);
+  list.append(...entries);
   div.append(list);
   return div;
 }
 
-function listEntriesPage(entry) {
+function listEntries(entry, date) {
   const item = createDiaryItem(entry);
   const itemTitle = createItemTitle(entry);
   const itemEntry = createItemEntry(entry);
@@ -105,7 +119,12 @@ function listEntriesPage(entry) {
 
   item.addEventListener("click", (event) => {
     event.preventDefault();
-    navigateTo(`/show/${entry.id}`);
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDate();
+    navigateTo(
+      `/show/${entry.id}/${year}-${formatMonth(month)}-${formatDay(day)}`
+    );
   });
 
   item.append(deleteButton);

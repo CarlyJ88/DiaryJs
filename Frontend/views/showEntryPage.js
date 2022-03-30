@@ -1,4 +1,4 @@
-import { showEntryHandler } from "../services/showEntries";
+import { getEntriesByDate } from "../services/service";
 import header from "../header";
 import write from "../new.png";
 
@@ -8,15 +8,32 @@ var showdown = require("showdown"),
     "# this is a title \n * bulletpoint 1 \n * bulletpoint 2 \n* bulletpoint 3",
   html = converter.makeHtml(text);
 
-export default function showEntryPage(entryId) {
-  return showEntryHandler().then((diaryEntries) =>
-    showEntry(diaryEntries, entryId.id)
-  );
+function parseDate(date) {
+  if (!date) {
+    return new Date();
+  }
+  const year = date.slice(0, 4);
+  const month = date.slice(5, 7);
+  const day = date.slice(8, 10);
+  return new Date(year, month - 1, day || "01");
+}
+
+export default function showEntryPage({ id, date }, user) {
+  console.log(date, "date in show entry");
+  const dateObject = parseDate(date);
+  return getEntriesByDate(
+    `${dateObject.getFullYear()}-${
+      dateObject.getMonth() + 1
+    }-${dateObject.getDate()} 00:00:00`,
+    `${dateObject.getFullYear()}-${
+      dateObject.getMonth() + 1
+    }-${dateObject.getDate()} 23:59:59`,
+    user.uid
+  ).then((diaryEntries) => showEntry(diaryEntries, id));
 }
 
 const createDiaryItem = () => {
   const item = document.createElement("li");
-  // item.style.height = "auto";
   item.className = "show-item";
   return item;
 };

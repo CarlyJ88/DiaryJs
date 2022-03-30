@@ -116,17 +116,19 @@ export function getDays(date, selectDay) {
   return days;
 }
 
-async function getData(date) {
+async function getData(date, user) {
+  const uid = user.uid;
   const entries = getCategoriesByDate(
     `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} 00:00:00`,
-    `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} 23:59:59`
+    `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} 23:59:59`,
+    uid
   );
   const response = await entries;
   return response;
 }
 
-async function getEntries(date) {
-  const entries = await getData(date);
+async function getEntries(date, user) {
+  const entries = await getData(date, user);
   const entry = entries.map((x) => {
     return showCategories(x);
   });
@@ -144,8 +146,8 @@ export function parseDate(date) {
   return new Date(year, month - 1, day || today.getDate());
 }
 
-async function displayCategories(dateObject) {
-  const entries = await getEntries(dateObject);
+async function displayCategories(dateObject, user) {
+  const entries = await getEntries(dateObject, user);
   const hasEntries = entries.length;
   if (hasEntries) {
     const categories = document.createElement("div");
@@ -160,7 +162,7 @@ async function displayCategories(dateObject) {
   }
 }
 
-export default async function calendarPage({ date }) {
+export default async function calendarPage({ date }, user) {
   const div = document.createElement("div");
   const headers = header("calendar", write, "/choose", "New item");
   const calendar = document.createElement("div");
@@ -174,7 +176,7 @@ export default async function calendarPage({ date }) {
   div.append(headers);
   div.append(calendarControls);
   div.append(calendar);
-  div.append(...(await displayCategories(dateObject)));
+  div.append(...(await displayCategories(dateObject, user))); //
   return div;
 }
 

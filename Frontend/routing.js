@@ -4,6 +4,9 @@ import showEntryPage from "./views/showEntryPage";
 import createEntryPage from "./views/newEntryPage";
 import calendarPage from "./views/calendarPage";
 import editEntryPage from "./views/editEntryPage";
+import loginPage from "./views/loginPage";
+
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const pathToRegex = (path) =>
   new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
@@ -28,12 +31,13 @@ export const navigateTo = (url) => {
 
 export const router = async () => {
   const routes = [
-    //   { path: "/", view: Dashboard },
+    { path: "/login", view: loginPage },
     { path: "/calendar", view: calendarPage },
+
     { path: "/calendar/:date", view: calendarPage },
     { path: "/choose", view: chooseCategory },
     { path: "/list/:date", view: listEntriesPage },
-    { path: "/show/:id", view: showEntryPage },
+    { path: "/show/:id/:date", view: showEntryPage },
     { path: "/new/:categoryId", view: createEntryPage },
     { path: "/edit/:id", view: editEntryPage },
   ];
@@ -57,24 +61,31 @@ export const router = async () => {
     };
   }
 
-  const view = await match.route.view(getParams(match));
-
-  const a = document.querySelector("#app");
-
-  a.querySelectorAll("*").forEach((n) => n.remove());
-
-  a.append(view);
-  // document.querySelector(
-  //   "#app"
-  // ).innerHTML = await view.getHtml();
+  onAuthStateChanged(getAuth(), async (user) => {
+    console.log("mathc:", match);
+    if (user || match.route.path == "/login") {
+      try {
+        const view = await match.route.view(getParams(match), user);
+        console.log(view, "view", user, "user in routing");
+        const a = document.querySelector("#app");
+        a.querySelectorAll("*").forEach((n) => n.remove());
+        a.append(view);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      console.log("User is signed out in routing");
+      navigateTo(`/login`);
+    }
+  });
 };
 
-window.addEventListener("popstate", router);
+// window.addEventListener("backward", router); // it doesn't seem to matter what I pass in here... actually this doesn't do anything...
+// document.addEventListener("popstate", router); // this doesn't do anything either :/
 
 document.addEventListener("DOMContentLoaded", () => {
   document.body.addEventListener("click", (event) => {
     if (event.target.matches("[data-link]")) {
-      /* if clicked link has a data-link attribute then prevent page reload and run navigateTo function*/
       event.preventDefault();
       navigateTo(event.target.href);
     }

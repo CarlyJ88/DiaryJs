@@ -212,6 +212,12 @@ html {
   white-space: nowrap;
 }
 
+.login-button {
+  background: pink;
+  /* display: flex */
+  text-align: center;
+}
+
 #show-entry {
   height: 100%;
 }

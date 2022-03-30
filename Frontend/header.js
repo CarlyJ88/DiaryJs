@@ -1,6 +1,4 @@
 import back from "./arrowback_111142.png";
-// import write from "./new.png";
-// import save from "./save.png";
 
 const backButton = () => {
   let backButton = document.createElement("img");
@@ -10,7 +8,6 @@ const backButton = () => {
   backButton.alt = "Back button";
   backButton.width = 40;
   backButton.height = 40;
-  // backButton.id = 'header-back-button'
   backButtonContainer.append(backButton);
 
   backButtonContainer.addEventListener("click", () => {
@@ -21,15 +18,12 @@ const backButton = () => {
 
 const title = (text) => {
   let title = document.createElement("h2");
-  // title.id = 'header-title'
   title.innerHTML = text;
-  // title.style.fontSize = '24px';
   return title;
 };
 
 const newItemButton = (link, icon, alt, callback) => {
-  console.log(icon, "icon");
-  let newItemButton = document.createElement("img");
+  const newItemButton = document.createElement("img");
   const linkContainer = document.createElement("a");
   linkContainer.dataset.link = true;
   newItemButton.src = icon;
@@ -49,6 +43,5 @@ export default function header(text, icon, link, alt, callback) {
   header.append(backButton());
   header.append(title(text));
   header.append(newItemButton(link, icon, alt, callback));
-  // body.append(header);
   return header;
 }

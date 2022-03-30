@@ -40,23 +40,25 @@ export function getCategories() {
     .then((res) => res.data);
 }
 
-export function getEntriesByDate(dateStart, dateEnd) {
+export function getEntriesByDate(dateStart, dateEnd, userId) {
   return axios
     .get(`http://${base}:4000/list-entries-by-date`, {
       params: {
         dateComingInStart: dateStart,
         dateComingInEnd: dateEnd,
+        incomingUserId: userId,
       },
     })
     .then((res) => res.data);
 }
 
-export function getCategoriesByDate(dateStart, dateEnd) {
+export function getCategoriesByDate(dateStart, dateEnd, userId) {
   return axios
     .get(`http://${base}:4000/list-categories-by-date`, {
       params: {
         dateComingInStart: dateStart,
         dateComingInEnd: dateEnd,
+        incomingUserId: userId,
       },
     })
     .then((res) => res.data);

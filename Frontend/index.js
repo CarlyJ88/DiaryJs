@@ -1,4 +1,5 @@
 import "regenerator-runtime/runtime.js";
+import "./services/firebase";
 
 import { navigateTo, router } from "./routing";
 

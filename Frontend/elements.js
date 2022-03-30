@@ -63,7 +63,7 @@ export const createArticle = () => {
 };
 
 export const createSubmitButton = () => {
-  const submit = document.createElement("a");
+  const submit = document.createElement("a"); // do I need to do this to make the button fill the whole screen width?
   submit.className = "button";
   submit.innerText = "Submit";
   return submit;
