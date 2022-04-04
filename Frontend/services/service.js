@@ -65,3 +65,14 @@ export function getCategoriesByDate(dateStart, dateEnd, userId) {
     })
     .then((res) => res.data);
 }
+
+export function selectEntryById(id, userId) {
+  return axios
+    .get(`http://${base}:4000/list-entry-by-id`, {
+      params: {
+        id: id,
+        incomingUserId: userId,
+      },
+    })
+    .then((res) => res.data);
+}

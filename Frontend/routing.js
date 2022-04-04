@@ -37,7 +37,7 @@ export const router = async () => {
     { path: "/calendar/:date", view: calendarPage },
     { path: "/choose", view: chooseCategory },
     { path: "/list/:date", view: listEntriesPage },
-    { path: "/show/:id/:date", view: showEntryPage },
+    { path: "/show/:id", view: showEntryPage },
     { path: "/new/:categoryId", view: createEntryPage },
     { path: "/edit/:id", view: editEntryPage },
   ];
@@ -62,11 +62,11 @@ export const router = async () => {
   }
 
   onAuthStateChanged(getAuth(), async (user) => {
-    console.log("mathc:", match);
+    // console.log("mathc:", match);
     if (user || match.route.path == "/login") {
       try {
         const view = await match.route.view(getParams(match), user);
-        console.log(view, "view", user, "user in routing");
+        // console.log(view, "view", user, "user in routing");
         const a = document.querySelector("#app");
         a.querySelectorAll("*").forEach((n) => n.remove());
         a.append(view);

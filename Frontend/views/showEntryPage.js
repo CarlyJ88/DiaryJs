@@ -1,4 +1,4 @@
-import { getEntriesByDate } from "../services/service";
+import { selectEntryById } from "../services/service";
 import header from "../header";
 import write from "../new.png";
 
@@ -8,27 +8,8 @@ var showdown = require("showdown"),
     "# this is a title \n * bulletpoint 1 \n * bulletpoint 2 \n* bulletpoint 3",
   html = converter.makeHtml(text);
 
-function parseDate(date) {
-  if (!date) {
-    return new Date();
-  }
-  const year = date.slice(0, 4);
-  const month = date.slice(5, 7);
-  const day = date.slice(8, 10);
-  return new Date(year, month - 1, day || "01");
-}
-// create a service + endpoint to query table by user id and uid
-export default function showEntryPage({ id, date }, user) {
-  const dateObject = parseDate(date);
-  return getEntriesByDate(
-    `${dateObject.getFullYear()}-${
-      dateObject.getMonth() + 1
-    }-${dateObject.getDate()} 00:00:00`,
-    `${dateObject.getFullYear()}-${
-      dateObject.getMonth() + 1
-    }-${dateObject.getDate()} 23:59:59`,
-    user.uid
-  ).then((diaryEntries) => showEntry(diaryEntries, id));
+export default function showEntryPage({ id }, user) {
+  return selectEntryById(id, user.uid).then((entry) => showEntry(entry[0]));
 }
 
 const createDiaryItem = () => {
@@ -59,19 +40,16 @@ const createItemLinkToArticle = (entry) => {
   return linkToArticle;
 }; // temporary until markdown module is implemented
 
-function showEntry(diaryEntries, entryId) {
+function showEntry(entry) {
+  console.log(entry, "entryId");
   const show = document.createElement("div");
   show.id = "show-entry";
-
-  for (let i = 0; i < diaryEntries.length; i++) {
-    if (diaryEntries[i].id === Number(entryId)) {
-      show.append(createEntryPage(diaryEntries[i]));
-    }
-  }
+  show.append(createEntryPage(entry));
   return show;
 }
 
 function createEntryPage(entry) {
+  console.log(entry, "entry");
   const div = document.createElement("div");
   div.className = "show-entry-page";
   const headers = header("show", write, `/edit/${entry.id}`, "Edit item");

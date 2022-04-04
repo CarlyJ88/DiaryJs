@@ -122,9 +122,7 @@ function listEntries(entry, date) {
     const year = date.getFullYear();
     const month = date.getMonth();
     const day = date.getDate();
-    navigateTo(
-      `/show/${entry.id}/${year}-${formatMonth(month)}-${formatDay(day)}`
-    );
+    navigateTo(`/show/${entry.id}`);
   });
 
   item.append(deleteButton);
