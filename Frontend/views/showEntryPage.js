@@ -17,9 +17,8 @@ function parseDate(date) {
   const day = date.slice(8, 10);
   return new Date(year, month - 1, day || "01");
 }
-
+// create a service + endpoint to query table by user id and uid
 export default function showEntryPage({ id, date }, user) {
-  console.log(date, "date in show entry");
   const dateObject = parseDate(date);
   return getEntriesByDate(
     `${dateObject.getFullYear()}-${

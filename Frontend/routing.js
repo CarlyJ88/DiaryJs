@@ -74,7 +74,6 @@ export const router = async () => {
         console.error(error);
       }
     } else {
-      console.log("User is signed out in routing");
       navigateTo(`/login`);
     }
   });

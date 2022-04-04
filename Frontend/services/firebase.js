@@ -45,16 +45,11 @@ export async function user() {
   const auth = getAuth();
   try {
     const result = await getRedirectResult(auth);
-    console.log("1", result, "result");
     // This gives you a Google Access Token. You can use it to access Google APIs.
     const credential = GoogleAuthProvider.credentialFromResult(result); // fail
-    console.log("2");
     const token = credential.accessToken;
-    console.log("3");
-    console.log("token:", token);
     // The signed-in user info.
     const user = result.user;
-    console.log("user:", user);
     return user;
   } catch (error) {
     console.log(error, "error");
@@ -68,18 +63,3 @@ export async function user() {
     const credential_1 = GoogleAuthProvider.credentialFromError(error);
   }
 }
-
-// onAuthStateChanged(getAuth(), (user) => {
-//   if (user) {
-//     // navigateTo(`/calendar`);
-//     console.log(user, "user in firebase");
-//     // User is signed in, see docs for a list of avasilable properties
-//     // https://firebase.google.com/docs/reference/js/firebase.User
-//     const uid = user.uid;
-//     // ...
-//   } else {
-//     console.log("User is signed out in firebase");
-//     // navigateTo(`/login`);
-//     // redirect();
-//   }
-// });

@@ -6,12 +6,13 @@ export function getEntries() {
   return axios.get(`http://${base}:4000/list`).then((res) => res.data);
 }
 
-export function addEntry(title, entry, categoryId, link) {
+export function addEntry(title, entry, categoryId, link, userId) {
   return axios.post(`http://${base}:4000/add-entry`, {
     title: title,
     entry: entry,
     categoryId: categoryId,
     link: link,
+    incomingUserId: userId,
   });
 }
 
@@ -24,13 +25,14 @@ export function deleteEntry(id) {
   });
 }
 
-export function editEntry(title, entry, categoryId, link, id) {
+export function editEntry(title, entry, categoryId, link, id, userId) {
   return axios.put(`http://${base}:4000/edit-entry`, {
     title: title,
     entry: entry,
     categoryId: categoryId,
     link: link,
     id: id,
+    incomingUserId: userId,
   });
 }
 

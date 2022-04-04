@@ -1,8 +1,6 @@
 export function createBlog() {
   const blog = document.createElement("textarea");
   blog.className = "myBlog";
-  blog.style.height = "100%";
-  blog.style.width = "100%";
   tinymce.init({
     target: blog,
     plugins: [
@@ -63,7 +61,7 @@ export const createArticle = () => {
 };
 
 export const createSubmitButton = () => {
-  const submit = document.createElement("a"); // do I need to do this to make the button fill the whole screen width?
+  const submit = document.createElement("a");
   submit.className = "button";
   submit.innerText = "Submit";
   return submit;

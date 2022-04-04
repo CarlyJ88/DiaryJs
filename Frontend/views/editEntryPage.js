@@ -12,13 +12,13 @@ import {
   createBlogLabel,
 } from "../elements";
 
-function handleEntry(title, blog, entryId, article) {
+function handleEntry(title, blog, entryId, article, user) {
   return (event) => {
     event.preventDefault();
     tinyMCE.triggerSave();
-    editEntry(title.value, blog.value, 4, article.value, entryId.id)
+    editEntry(title.value, blog.value, 4, article.value, entryId.id, user.uid)
       .then((response) => {
-        navigateTo(`/show/${response.data.id}`);
+        navigateTo(`/show/${response.data.id}`); // add date parameter??? /${year}-${formatMonth(month)}-${formatDay(day)}
       })
       .catch(function (error) {
         console.log(error);
@@ -45,10 +45,11 @@ async function showEntryData(entryId, title, article, blog) {
   blog.value = currentEntry.entry;
 }
 
-export default async function editEntryPage(entryId) {
+export default async function editEntryPage(entryId, user) {
   const div = document.createElement("div");
   div.className = "container";
-
+  const container = document.createElement("div");
+  container.className = "entry-container";
   const titleLabel = createTitleLabel();
   const title = createTitle();
   const articleLabel = createArticleLabel();
@@ -61,15 +62,15 @@ export default async function editEntryPage(entryId) {
     save,
     null,
     "Save item",
-    handleEntry(title, blog, entryId, article)
+    handleEntry(title, blog, entryId, article, user)
   );
   div.append(headers);
-  div.append(titleLabel);
-  div.append(title);
-  div.append(title);
-  div.append(articleLabel);
-  div.append(article);
-  div.append(blogLabel);
-  div.append(blog);
+  container.append(titleLabel);
+  container.append(title);
+  container.append(articleLabel);
+  container.append(article);
+  container.append(blogLabel);
+  container.append(blog);
+  div.append(container);
   return div;
 }
