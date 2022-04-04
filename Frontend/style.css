@@ -220,6 +220,12 @@ html {
   text-align: center;
 }
 
+.myBlog {
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+}
+
 #show-entry {
   height: 100%;
 }
