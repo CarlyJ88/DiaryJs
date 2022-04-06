@@ -41,7 +41,6 @@ const createItemLinkToArticle = (entry) => {
 }; // temporary until markdown module is implemented
 
 function showEntry(entry) {
-  console.log(entry, "entryId");
   const show = document.createElement("div");
   show.id = "show-entry";
   show.append(createEntryPage(entry));
@@ -49,7 +48,6 @@ function showEntry(entry) {
 }
 
 function createEntryPage(entry) {
-  console.log(entry, "entry");
   const div = document.createElement("div");
   div.className = "show-entry-page";
   const headers = header("show", write, `/edit/${entry.id}`, "Edit item");
