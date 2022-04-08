@@ -1,0 +1,20 @@
+{
+  "name": "diary",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client-install"  : "cd Frontend && npm install && npm run build && cp -R /Frontend/dist /Backend/public && npm run test",
+    "server-install"  : "cd Backend && npm install && npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CarlyJ88/DiaryJs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CarlyJ88/DiaryJs/issues"
+  },
+  "homepage": "https://github.com/CarlyJ88/DiaryJs#readme"
+}
