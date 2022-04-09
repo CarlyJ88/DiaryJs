@@ -26,4 +26,4 @@ jobs:
           cache: "npm"
       - run: npm install
       - run: npm run client-install
-      - run: npm run client-install
+      - run: npm run server-install
