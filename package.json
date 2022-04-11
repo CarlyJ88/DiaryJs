@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client-install"  : "cd Frontend && npm install && npm run build && cp -R dist ../Backend/public && npm run test",
-    "server-install"  : "cd Backend && npm install && npm run build && npm run test"
+    "client-install": "cd Frontend && npm install && npm run build && cp -R dist ../Backend/public && npm run test",
+    "server-install": "cd Backend && npm install && npm run build && npm run test"
   },
   "repository": {
     "type": "git",
