@@ -2,6 +2,6 @@
   "dev": {
     "driver": "pg",
     "user": "carlyjenkinson",
-    "database": "diary"
+    "database": "diary_test"
   }
 }
