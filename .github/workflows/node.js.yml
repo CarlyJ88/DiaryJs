@@ -21,10 +21,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: "verify db"
-      run: |
-        apt-get update
-        apt-get install -y postgresql-14
-        PGPASSWORD=password psql -U postgres -h postgres -c "select * from pg_database"
+        run: |
+          apt-get update
+          apt-get install -y postgresql-14
+          PGPASSWORD=password psql -U postgres -h postgres -c "select * from pg_database"
       # - run: npm install
       # - run: npm run client-install
       # - run: npm run server-install
