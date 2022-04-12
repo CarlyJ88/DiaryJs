@@ -2,6 +2,18 @@
   "dev": {
     "driver": "pg",
     "user": "carlyjenkinson",
+    "database": "diary"
+  },
+  "test": {
+    "driver": "pg",
+    "user": "carlyjenkinson",
     "database": "diary_test"
+  },
+  "ci":{
+    "driver": "pg",
+    "user": "postgres",
+    "password": "password",
+    "database": "postgres",
+    "host": "postgres"
   }
 }

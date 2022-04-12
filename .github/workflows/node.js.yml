@@ -8,7 +8,12 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_PASSWORD: password
 
     strategy:
       matrix:
@@ -16,11 +21,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-      - run: npm ci
-      - run: npm client-install
-      - run: npm client-install
+      - run: npm install
+      - run: npm run client-install
+      - run: npm run server-install
+      - run: npm run migrate-db ci
+      - run: npm run server-build

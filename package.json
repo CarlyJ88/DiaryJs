@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "client-install": "cd Frontend && npm install && npm run build && cp -R dist ../Backend/public && npm run test",
-    "server-install": "cd Backend && npm install && npm run build && npm run test"
+    "server-install": "cd Backend && npm install",
+    "server-build": "cd Backend && npm run build && npm run test",
+    "migrate-db": "cd Backend && npm run migrate-db $1"
   },
   "repository": {
     "type": "git",
