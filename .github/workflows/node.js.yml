@@ -14,20 +14,20 @@ jobs:
         image: postgres:14
         env:
           POSTGRES_PASSWORD: password
-
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     strategy:
       matrix:
         node-version: [14.x]
 
     steps:
       - uses: actions/checkout@v3
-      - name: "verify db"
-        run: |
-          apt-get update
-          apt-get install -y postgresql-14
-          PGPASSWORD=password psql -U postgres -h postgres -c "select * from pg_database"
-      # - run: npm install
-      # - run: npm run client-install
-      # - run: npm run server-install
-      # - run: npm run migrate-db ci
-      # - run: npm run server-build
+      # - name: "verify db"
+      # run: |
+      #   apt-get update
+      #   apt-get install -y postgresql-14
+      #   PGPASSWORD=password psql -U postgres -h postgres -c "select * from pg_database"
+      - run: npm install
+      - run: npm run client-install
+      - run: npm run server-install
+      - run: npm run migrate-db ci
+      - run: npm run server-build
