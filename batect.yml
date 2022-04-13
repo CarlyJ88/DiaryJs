@@ -38,8 +38,7 @@ tasks:
   run-test-database:
     description: setup test database on postgres
     run:
-      container: test-database
-      # command: ...
+      container: test-databases
   run-backend-tests:
     description: run tests
     run:
@@ -62,15 +61,3 @@ tasks:
     run:
       container: frontend
       command: npm run test
-
-  # name:
-  #   description:
-  #   run:
-  #       something: such as a container etc
-  #       command: ...
-
-  # say-hello:
-  #   description: Say hello to the nice person reading the Batect documentation
-  #   run:
-  #     container: my-container
-  #     command: echo 'Hello world!'
