@@ -43,7 +43,7 @@ tasks:
     description: run tests
     run:
       container: backend
-      command: sh -c 'npm run migrate-db ci && npm run test'
+      command: sh -c 'npm install && npm run migrate-db ci && npm run test'
   run-backend:
     description: run backend
     run:
