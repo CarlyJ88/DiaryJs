@@ -60,4 +60,4 @@ tasks:
     description: run tests
     run:
       container: frontend
-      command: npm run test
+      command: sh -c 'npm install && npm run test'
