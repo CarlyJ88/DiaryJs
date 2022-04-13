@@ -6,9 +6,17 @@ describe('lists entries', () => {
   let client:Client;
 
   beforeEach(async ()=>{
+    console.log('test config: ',{
+      user: process.env.dbUsername || 'carlyjenkinson',
+      password: process.env.dbPassword,
+      database: process.env.dbDatabase || 'diary_test',
+      host: process.env.dbHost || 'localhost'
+    })
     client = new Client({
-      user: 'carlyjenkinson',
-      database: 'diary_test'
+      user: process.env.dbUsername || 'carlyjenkinson',
+      password: process.env.dbPassword,
+      database: process.env.dbDatabase || 'diary_test',
+      host: process.env.dbHost || 'localhost'
     }) 
     await client.connect()
     return await client.query('DELETE FROM entries')

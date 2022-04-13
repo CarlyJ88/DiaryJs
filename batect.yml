@@ -1,0 +1,76 @@
+project_name: meta-blogger
+
+containers:
+  test-database:
+    image: postgres:14.2
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    ports:
+      - 5433:5432
+  frontend:
+    image: node:14
+    volumes:
+      - local: Frontend
+        container: /code
+    working_directory: /code
+    ports:
+      - 1234:1234
+  backend:
+    image: node:14
+    volumes:
+      - local: Backend
+        container: /code
+    working_directory: /code
+    environment:
+      dbUsername: postgres
+      dbPassword: password
+      dbHost: test-database
+      dbDatabase: postgres
+    ports:
+      - 4000:4000
+    dependencies:
+      - test-database
+    command: sh -c 'npm run migrate-db ci && npm run start'
+
+tasks:
+  run-test-database:
+    description: setup test database on postgres
+    run:
+      container: test-database
+      # command: ...
+  run-backend-tests:
+    description: run tests
+    run:
+      container: backend
+      command: sh -c 'npm run migrate-db ci && npm run test'
+  run-backend:
+    description: run backend
+    run:
+      container: backend
+      command: sh -c 'npm install && npm run migrate-db ci && npm run start'
+  run-frontend:
+    description: run frontend
+    dependencies:
+      - backend
+    run:
+      container: frontend
+      command: sh -c 'npm install && npm run dev'
+  run-frontend-tests:
+    description: run tests
+    run:
+      container: frontend
+      command: npm run test
+
+  # name:
+  #   description:
+  #   run:
+  #       something: such as a container etc
+  #       command: ...
+
+  # say-hello:
+  #   description: Say hello to the nice person reading the Batect documentation
+  #   run:
+  #     container: my-container
+  #     command: echo 'Hello world!'

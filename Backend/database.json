@@ -11,9 +11,9 @@
   },
   "ci":{
     "driver": "pg",
-    "user": "postgres",
-    "password": "password",
-    "database": "postgres",
-    "host": "postgres"
+    "user": {"ENV": "dbUsername"},
+    "password": {"ENV": "dbPassword"},
+    "database": {"ENV": "dbDatabase"},
+    "host": {"ENV": "dbHost"}
   }
 }
