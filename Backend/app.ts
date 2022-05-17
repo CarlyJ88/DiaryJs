@@ -9,7 +9,17 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cors())
 
+app.use((req, res, next)=>{
+  console.log(req.url);
+  next();
+})
+
 app.use(express.static(path.join(__dirname, "public")));
+
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, '/index.html'));
+});
 
 app.get('/list', async(req, res) =>{
   res.json(await listEntries())
@@ -59,5 +69,10 @@ app.get('/list-entry-by-id', async(req, res) => {
   const passBack = await selectEntryById(id, incomingUserId)
   res.json(passBack)
 })
+
+
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 export default app;

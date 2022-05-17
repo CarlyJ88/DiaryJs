@@ -18,3 +18,5 @@ jobs:
         run: ./batect run-backend-tests
       - name: Run frontend tests via batect
         run: ./batect run-frontend-tests
+      - name: Build application
+        run: ./batect run-build
